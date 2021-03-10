@@ -1,3 +1,5 @@
+import "../styles/tailwind.css";
+
 import axios from "axios";
 import type { NextPageContext } from "next";
 import type { AppProps } from "next/app";
