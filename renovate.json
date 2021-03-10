@@ -1,0 +1,7 @@
+{
+  "extends": ["config:base"],
+  "baseBranches": ["develop"],
+  "automerge": true,
+  "vulnerabilityAlerts": { "enabled": true },
+  "lockFileMaintenance": { "enabled": true }
+}
