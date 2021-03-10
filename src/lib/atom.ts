@@ -8,3 +8,12 @@ export const userState = atom({
     email: "",
   },
 });
+
+// export const userState = atom({
+//   key: "userInfoState",
+//   default: {
+//     // id: "",
+//     // name: "",
+//     // email: "",
+//   },
+// });
