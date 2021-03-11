@@ -1,10 +1,60 @@
+import axios from "axios";
+import cc from "classcat";
+import { format } from "date-fns";
+import marked from "marked";
+import Link from "next/link";
 import type { VFC } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { userState } from "src/lib/atom";
 
 type Props = {
   post: PostType;
 };
 
 export const PostCard: VFC<Props> = ({ post }) => {
+  const [isLikes, setIsLikes] = useState(false);
+  const [likeCount, setLikeCount] = useState(post.likeCount || 0);
+  const user = useRecoilValue(userState);
+  useEffect(() => {
+    if (user.accessToken) {
+      axios
+        .get(`/api/v1/likes/${post.id}/is_likes`, {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        })
+        .then((res) => {
+          setIsLikes(res.data.result);
+        });
+    }
+  }, []);
+
+  const handleLike = async () => {
+    if (user.accessToken) {
+      const res = await axios.get(`/api/v1/likes/set/${post.id}`, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+
+      const data: { operation: string; like: LikeType } = res.data;
+
+      if (data.operation === "delete") {
+        setIsLikes(false);
+        const oldCount = likeCount;
+        setLikeCount(oldCount - 1);
+      }
+      if (data.operation === "create") {
+        setIsLikes(true);
+        const oldCount = likeCount;
+        setLikeCount(oldCount + 1);
+      }
+    } else {
+      alert("ログインしてください");
+    }
+  };
+
   return (
     <div className="bg-white w-full rounded-lg shadow mb-2 md:mb-4 p-2 md:p-4">
       <div className="flex items-center">
@@ -17,12 +67,23 @@ export const PostCard: VFC<Props> = ({ post }) => {
         </div>
         <p className="text-xs md:text-sm font-bold">{post.user.name}</p>
         <span className="text-base md:text-lg">・</span>
-        <p className="text-xs md:text-sm text-gray-500">{post.createdAt}</p>
+        <p className="text-xs md:text-sm text-gray-500">
+          {format(new Date(post.createdAt), "yyyy年M月d日")}
+        </p>
       </div>
       <h2 className="md:text-2xl font-bold line-clamp-1 mb-1 md:mb-2">
-        {post.title}
+        <Link
+          href="/users/[user_id]/posts/[post_id]"
+          as={`/users/${post.userId}/posts/${post.id}`}
+        >
+          {post.title}
+        </Link>
       </h2>
-      <p className="text-sm md:text-base line-clamp-2">asadf</p>
+      <p className="text-sm md:text-base line-clamp-2">
+        {marked(post.body)
+          .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
+          .substr(0, 150)}
+      </p>
       <div className="flex items-center justify-between border-t mt-2 pt-1">
         <ul className="flex items-center mb-1">
           <li className="text-xs md:text-sm font-light line-clamp-1 mr-1">
@@ -45,14 +106,13 @@ export const PostCard: VFC<Props> = ({ post }) => {
         </ul>
         <div className="flex items-center">
           <button
-            className="block ml-auto text-gray-400"
-            // className={cc([
-            //   "block ml-auto text-gray-400",
-            //   {
-            //     "text-pink-400": isLikes,
-            //   },
-            // ])}
-            // onClick={handleLike}
+            className={cc([
+              "block ml-auto text-gray-400",
+              {
+                "text-pink-400": isLikes,
+              },
+            ])}
+            onClick={handleLike}
           >
             <svg
               className="w-5 h-5"
@@ -67,7 +127,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
               ></path>
             </svg>
           </button>
-          <span className="text-xs ml-1">2</span>
+          <span className="text-xs ml-1">{likeCount}</span>
         </div>
       </div>
     </div>

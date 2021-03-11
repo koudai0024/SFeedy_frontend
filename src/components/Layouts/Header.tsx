@@ -8,10 +8,6 @@ import { userState } from "src/lib/atom";
 
 export const Header = () => {
   const user = useRecoilValue(userState);
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(user);
-  }, []);
 
   return (
     <header className="bg-white w-full shadow">
@@ -77,6 +73,7 @@ const HeaderLogined = () => {
       name: "",
       email: "",
       image: "",
+      accessToken: "",
     });
     return;
   };

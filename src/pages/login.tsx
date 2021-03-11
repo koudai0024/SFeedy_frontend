@@ -31,10 +31,13 @@ const Login = () => {
               name: res.data.name,
               email: res.data.email,
               image: res.data.image,
+              accessToken: accessToken,
             });
-            setCookie(null, "user", `${JSON.stringify(res.data)}`);
-            // eslint-disable-next-line no-console
-            console.log(res.data);
+            setCookie(
+              null,
+              "user",
+              `${JSON.stringify({ ...res.data, accessToken })}`
+            );
           });
         router.push("/login");
       }

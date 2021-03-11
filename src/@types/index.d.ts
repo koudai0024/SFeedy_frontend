@@ -34,3 +34,8 @@ type TagType = {
   updatedAt: string;
   posts: PostType[];
 };
+
+type LikeType = {
+  userId: string;
+  postId: string;
+};
