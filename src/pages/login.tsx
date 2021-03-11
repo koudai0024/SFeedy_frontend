@@ -30,8 +30,11 @@ const Login = () => {
               id: res.data.id,
               name: res.data.name,
               email: res.data.email,
+              image: res.data.image,
             });
             setCookie(null, "user", `${JSON.stringify(res.data)}`);
+            // eslint-disable-next-line no-console
+            console.log(res.data);
           });
         router.push("/login");
       }

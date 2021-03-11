@@ -76,6 +76,7 @@ const HeaderLogined = () => {
       id: "",
       name: "",
       email: "",
+      image: "",
     });
     return;
   };
@@ -92,7 +93,7 @@ const HeaderLogined = () => {
             <span className="sr-only">Open user menu</span>
             <img
               className="object-cover object-center md:w-12 w-8 md:h-12 h-8"
-              src={user.id || ""}
+              src={user.image || ""}
               width="800"
               height="800"
               id="image-btn"

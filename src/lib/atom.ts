@@ -6,14 +6,6 @@ export const userState = atom({
     id: "",
     name: "",
     email: "",
+    image: "",
   },
 });
-
-// export const userState = atom({
-//   key: "userInfoState",
-//   default: {
-//     // id: "",
-//     // name: "",
-//     // email: "",
-//   },
-// });
