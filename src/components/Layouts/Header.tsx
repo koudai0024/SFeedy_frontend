@@ -149,7 +149,7 @@ const HeaderLogined = () => {
           </div>
         </Transition>
       </div>
-      <Link href="/post">
+      <Link href="/new">
         <a className="block text-white font-bold border border-indigo-500 bg-indigo-500 hover:bg-indigo-300 md:py-2 py-1 md:px-4 px-2 rounded md:ml-4 ml-2">
           Add New
         </a>

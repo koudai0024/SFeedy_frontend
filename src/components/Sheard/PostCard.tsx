@@ -100,9 +100,16 @@ export const PostCard: VFC<Props> = ({ post }) => {
               ></path>
             </svg>
           </li>
-          <li className="text-xs md:text-sm font-light line-clamp-1 mr-1">
-            <a>aaa</a>
-          </li>
+          {post.tags.map((tag) => {
+            return (
+              <li
+                key={tag.id}
+                className="text-xs md:text-sm font-light line-clamp-1 mr-1"
+              >
+                <a>{tag.name}</a>
+              </li>
+            );
+          })}
         </ul>
         <div className="flex items-center">
           <button
