@@ -57,7 +57,7 @@ const UpdatePost = () => {
 
   const handleSend = () => {
     axios
-      .put(`/api/v1/posts/${router.query.post_id}`, data, {
+      .put(`/api/v1/posts/${router.query.postId}`, data, {
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
         },

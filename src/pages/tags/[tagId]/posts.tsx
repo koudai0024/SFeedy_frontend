@@ -26,7 +26,7 @@ const TagPosts: VFC<Props> = ({ posts, tags, tag, count }) => {
           <Pagination
             count={count}
             currentPage={currentPage}
-            path={`/tags/${tag.id}/posts`}
+            path={`/tags/${tag?.id}/posts`}
           />
         </div>
         <div className="w-72 ml-4">

@@ -1,14 +1,13 @@
-// import { useRouter } from "next/router";
 import { Transition } from "@headlessui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { userState } from "src/lib/atom";
 
 export const Header = () => {
   const user = useRecoilValue(userState);
-  // eslint-disable-next-line no-console
 
   return (
     <header className="bg-white w-full shadow">
@@ -52,9 +51,10 @@ export const Header = () => {
 };
 
 const HeaderLogined = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
+  const resetUser = useResetRecoilState(userState);
   useEffect(() => {
     window.onclick = (e: any) => {
       const target: any = e.target;
@@ -69,13 +69,8 @@ const HeaderLogined = () => {
   const handleSignOut = () => {
     destroyCookie(null, "auth");
     destroyCookie(null, "user");
-    setUser({
-      id: "",
-      name: "",
-      email: "",
-      image: "",
-      accessToken: "",
-    });
+    resetUser();
+    router.push("/");
     return;
   };
   return (

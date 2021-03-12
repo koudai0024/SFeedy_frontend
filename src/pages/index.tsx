@@ -38,7 +38,7 @@ const Home: VFC<Props> = ({ posts, tags, users, count }) => {
                 return (
                   <li key={tag.id}>
                     <Link
-                      href="/tags/[tag_id]/posts"
+                      href="/tags/[tagId]/posts"
                       as={`/tags/${tag.id}/posts`}
                     >
                       <a className="flex justify-between items-center text-sm mb-1">
@@ -61,8 +61,8 @@ const Home: VFC<Props> = ({ posts, tags, users, count }) => {
                 return (
                   <li key={user.id}>
                     <Link
-                      href="/tags/[tag_id]/posts"
-                      as={`/tags/${user.id}/posts`}
+                      href="/users/[userId]/posts"
+                      as={`/users/${user.id}/posts`}
                     >
                       <a className="flex justify-between items-center text-sm mb-1">
                         <span>{user.name}</span>

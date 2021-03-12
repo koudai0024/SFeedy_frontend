@@ -110,7 +110,9 @@ export const PostCard: VFC<Props> = ({ post }) => {
                 key={tag.id}
                 className="text-xs md:text-sm font-light line-clamp-1 mr-1"
               >
-                <a>{tag.name}</a>
+                <Link href="/tags/[tagId]/posts" as={`/tags/${tag.id}/posts`}>
+                  <a>{tag.name}</a>
+                </Link>
               </li>
             );
           })}
