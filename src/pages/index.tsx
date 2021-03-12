@@ -60,10 +60,7 @@ const Home: VFC<Props> = ({ posts, tags, users, count }) => {
               {users.map((user) => {
                 return (
                   <li key={user.id}>
-                    <Link
-                      href="/users/[userId]/posts"
-                      as={`/users/${user.id}/posts`}
-                    >
+                    <Link href="/users/[userId]" as={`/users/${user.id}`}>
                       <a className="flex justify-between items-center text-sm mb-1">
                         <span>{user.name}</span>
                         <span>{user.postCount}件</span>

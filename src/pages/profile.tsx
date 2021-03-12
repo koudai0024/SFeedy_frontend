@@ -21,7 +21,7 @@ const Profile = () => {
       setImage(`${user.image}`);
       setName(`${user.name}`);
       axios
-        .get("/api/v1/users/info", {
+        .get("/api/v1/users/detail", {
           headers: {
             Authorization: `Bearer ${user.accessToken}`,
           },
