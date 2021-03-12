@@ -57,19 +57,23 @@ export const PostCard: VFC<Props> = ({ post }) => {
 
   return (
     <div className="bg-white w-full rounded-lg shadow mb-2 md:mb-4 p-2 md:p-4">
-      <div className="flex items-center">
-        <div className="overflow-hidden rounded-full w-4 md:w-6 h-4 md:h-6 mr-2 md:mr-3 ">
-          <img
-            src="/blank-profile-picture-973460_1280.png"
-            alt=""
-            className="w-4 md:w-6 h-4 md:h-6 object-cover object-center"
-          />
-        </div>
-        <p className="text-xs md:text-sm font-bold">{post.user.name}</p>
-        <span className="text-base md:text-lg">・</span>
-        <p className="text-xs md:text-sm text-gray-500">
-          {format(new Date(post.createdAt), "yyyy年M月d日")}
-        </p>
+      <div>
+        <Link href="/users/[user_id]" as={`/users/${post.userId}`}>
+          <a className="flex items-center mb-1 md:mb-2">
+            <div className="overflow-hidden rounded-full w-4 md:w-6 h-4 md:h-6 mr-2 md:mr-3 ">
+              <img
+                src="/blank-profile-picture-973460_1280.png"
+                alt=""
+                className="w-4 md:w-6 h-4 md:h-6 object-cover object-center"
+              />
+            </div>
+            <p className="text-xs md:text-sm font-bold">{post.user.name}</p>
+            <span className="text-base md:text-lg">・</span>
+            <p className="text-xs md:text-sm text-gray-500">
+              {format(new Date(post.createdAt), "yyyy年M月d日")}
+            </p>
+          </a>
+        </Link>
       </div>
       <h2 className="md:text-2xl font-bold line-clamp-1 mb-1 md:mb-2">
         <Link
