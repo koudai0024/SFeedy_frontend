@@ -18,7 +18,7 @@ export const Header = () => {
               <a>SFeedy</a>
             </Link>
           </p>
-          <Link href="/search">
+          {/* <Link href="/search">
             <a className="text-indigo-500 border-2 border-indigo-500 rounded ml-4">
               <svg
                 className="w-6 h-6"
@@ -33,7 +33,7 @@ export const Header = () => {
                 />
               </svg>
             </a>
-          </Link>
+          </Link> */}
         </div>
         <div className="flex items-center">
           {user.id && <HeaderLogined />}
