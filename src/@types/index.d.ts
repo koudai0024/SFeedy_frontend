@@ -39,3 +39,10 @@ type LikeType = {
   userId: string;
   postId: string;
 };
+
+type AccessUserType = {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+};

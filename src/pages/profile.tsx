@@ -27,7 +27,7 @@ const Profile = () => {
           },
         })
         .then((res) => {
-          setDescription(res.data.profile.description);
+          setDescription(res.data.profile?.description);
         })
         .catch(() => {
           return;
