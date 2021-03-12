@@ -2,7 +2,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { setCookie } from "nookies";
 import { useSetRecoilState } from "recoil";
-import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { userState } from "src/lib/atom";
 
 const Login = () => {
@@ -45,13 +44,14 @@ const Login = () => {
     }, 1000);
   };
   return (
-    <CommonContainer>
+    <div className="bg-white shadow text-center mt-20 px-2 py-4 rounded-lg w-full max-w-lg mx-auto">
+      <h1 className="text-2xl font-bold mb-8">ログイン</h1>
       <div>
         <button onClick={handleLogin}>
           <img src="/btn_google_signin_dark_focus_web.png" alt="" />
         </button>
       </div>
-    </CommonContainer>
+    </div>
   );
 };
 
