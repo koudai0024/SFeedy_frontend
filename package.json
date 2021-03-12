@@ -33,6 +33,7 @@
     "cheerio": "^1.0.0-rc.5",
     "classcat": "^5.0.3",
     "date-fns": "^2.19.0",
+    "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.6.0",
     "marked": "^2.0.1",
     "next": "10.0.8",

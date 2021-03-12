@@ -52,7 +52,9 @@ const UpdatePost = () => {
     title: title,
     body: body,
     tags:
-      tags?.trim() !== "" ? Array.from(new Set(tags?.split(/\s+/, 5))) : null,
+      tags?.trim() !== ""
+        ? Array.from(new Set(tags.trim().split(/\s+/, 5)))
+        : null,
   };
 
   const handleSend = () => {

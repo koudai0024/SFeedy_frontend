@@ -1,4 +1,6 @@
 import "../styles/tailwind.css";
+import "github-markdown-css";
+import "highlight.js/styles/github-gist.css";
 
 import axios from "axios";
 import type { NextPageContext } from "next";
