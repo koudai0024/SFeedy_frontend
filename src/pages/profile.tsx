@@ -1,4 +1,5 @@
 import axios from "axios";
+import cc from "classcat";
 import { useRouter } from "next/router";
 import { setCookie } from "nookies";
 import type { ChangeEvent } from "react";
@@ -13,6 +14,7 @@ const Profile = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  const [isLoad, setIsLoad] = useState(false);
 
   useEffect(() => {
     if (user.accessToken) {
@@ -72,13 +74,13 @@ const Profile = () => {
   };
   const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.[0]) {
-      // setIsLoad(false);
+      setIsLoad(false);
       return;
     }
     const files = e.target.files?.[0];
     const formData = new FormData();
     formData.append("image", files);
-    // setIsLoad(true);
+    setIsLoad(true);
 
     axios
       .post("/api/v1/upload/profile", formData, {
@@ -88,10 +90,10 @@ const Profile = () => {
       })
       .then((res) => {
         setImage(res.data.url);
-        // setIsLoad(false);
+        setIsLoad(false);
       })
       .catch(() => {
-        // setIsLoad(false);
+        setIsLoad(false);
       });
   };
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -108,12 +110,22 @@ const Profile = () => {
           <img
             src={image}
             alt=""
-            className="w-40 md:w-60 h-40 md:h-60 object-cover object-center"
+            className={cc([
+              "w-40 md:w-60 h-40 md:h-60 object-cover object-center ",
+              {
+                "animate-pulse": isLoad,
+              },
+            ])}
           />
         </div>
         <label
           htmlFor="file_photo"
-          className="text-white bg-red-400 px-4 py-2 rounded-full mb-8"
+          className={cc([
+            "text-white bg-red-400 px-4 py-2 rounded-full mb-8",
+            {
+              "bg-gray-400 pointer-events-none": isLoad,
+            },
+          ])}
         >
           画像を変更
           <input
@@ -140,7 +152,12 @@ const Profile = () => {
         />
         <button
           onClick={handleSend}
-          className="bg-indigo-400 text-white font-bold px-8 py-2 rounded"
+          className={cc([
+            "bg-indigo-400 text-white font-bold px-8 py-2 rounded",
+            {
+              "bg-gray-400 pointer-events-none": isLoad,
+            },
+          ])}
         >
           変更
         </button>

@@ -2,9 +2,11 @@ import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import cheerio from "cheerio";
+import cc from "classcat";
 import hljs from "highlight.js";
 import marked from "marked";
 import type { ChangeEvent, Dispatch, SetStateAction, VFC } from "react";
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userState } from "src/lib/atom";
 
@@ -25,15 +27,15 @@ export const Editor: VFC<Props> = ({
   tags,
   setTags,
 }) => {
-  // const [isLoad, setIsLoad] = useState(false); //Todo Loading Icon 追加
+  const [isLoad, setIsLoad] = useState(false); //Todo Loading Icon 追加
   const user = useRecoilValue(userState);
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.[0]) {
-      // setIsLoad(false);
+      setIsLoad(false);
       return;
     }
-    // setIsLoad(true);
+    setIsLoad(true);
     const files = e.target.files?.[0] || "";
     const formData = new FormData();
     formData.append("image", files);
@@ -44,10 +46,10 @@ export const Editor: VFC<Props> = ({
       .then((res) => {
         const oldValue = body;
         setBody(oldValue + `![](${res.data.url})`);
-        // setIsLoad(false);
+        setIsLoad(false);
       })
       .catch(() => {
-        // setIsLoad(false);
+        setIsLoad(false);
       });
     return;
   };
@@ -97,7 +99,14 @@ export const Editor: VFC<Props> = ({
       <div className="bg-white flex">
         <div className="box-border overflow-hidden w-2/4 border-r border-black">
           <div className="block w-full border-b border-black px-2 py-1">
-            <label htmlFor="photoBtn">
+            <label
+              htmlFor="photoBtn"
+              className={cc([
+                {
+                  "pointer-events-none animate-pulse": isLoad,
+                },
+              ])}
+            >
               <FontAwesomeIcon icon={faImage} />
               <input
                 className="hidden"
@@ -121,7 +130,12 @@ export const Editor: VFC<Props> = ({
             placeholder="本文を入力してください"
             value={body}
             onChange={handleBody}
-            className="resize-none overflow-scroll box-border w-full h-full p-4"
+            className={cc([
+              "resize-none overflow-scroll box-border w-full h-full p-4",
+              {
+                "pointer-events-none animate-pulse": isLoad,
+              },
+            ])}
           ></textarea>
         </div>
         <div className="overflow-hidden w-2/4 h-full">
