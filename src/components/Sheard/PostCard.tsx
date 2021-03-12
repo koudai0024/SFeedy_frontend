@@ -77,7 +77,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
       </div>
       <h2 className="md:text-2xl font-bold line-clamp-1 mb-1 md:mb-2">
         <Link
-          href="/users/[user_id]/posts/[post_id]"
+          href="/users/[userId]/posts/[postId]"
           as={`/users/${post.userId}/posts/${post.id}`}
         >
           {post.title}
