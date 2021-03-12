@@ -8,6 +8,7 @@ import { userState } from "src/lib/atom";
 
 export const Header = () => {
   const user = useRecoilValue(userState);
+  // eslint-disable-next-line no-console
 
   return (
     <header className="bg-white w-full shadow">

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { setCookie } from "nookies";
 import { useSetRecoilState } from "recoil";
+import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { userState } from "src/lib/atom";
 
 const Login = () => {
@@ -39,15 +40,18 @@ const Login = () => {
               `${JSON.stringify({ ...res.data, accessToken })}`
             );
           });
-        router.push("/login");
+        router.push("/");
       }
     }, 1000);
   };
   return (
-    <div>
-      <h1>Hello World!!!</h1>
-      <button onClick={handleLogin}>login</button>
-    </div>
+    <CommonContainer>
+      <div>
+        <button onClick={handleLogin}>
+          <img src="/btn_google_signin_dark_focus_web.png" alt="" />
+        </button>
+      </div>
+    </CommonContainer>
   );
 };
 

@@ -1,8 +1,10 @@
 import axios from "axios";
 import type { GetServerSideProps } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import type { VFC } from "react";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
+import { Pagination } from "src/components/Sheard/Pagination";
 import { PostCard } from "src/components/Sheard/PostCard";
 import { MainHeading } from "src/components/Sheard/Typography";
 
@@ -10,10 +12,12 @@ type Props = {
   posts: PostType[];
   tags: TagType[];
   users: UserType[];
-  _count: number;
+  count: number;
 };
 
-const Home: VFC<Props> = ({ posts, tags, users, _count }) => {
+const Home: VFC<Props> = ({ posts, tags, users, count }) => {
+  const router = useRouter();
+  const currentPage = parseInt(`${router.query.page}`) || 1;
   return (
     <CommonContainer>
       <MainHeading variant="h1" className="mb-4">
@@ -24,9 +28,10 @@ const Home: VFC<Props> = ({ posts, tags, users, _count }) => {
           {posts.map((post) => {
             return <PostCard key={post.id} post={post} />;
           })}
+          <Pagination count={count} currentPage={currentPage} path="" />
         </div>
         <div className="w-full lg:w-72 mt-8 lg:mt-0 ml-0 lg:ml-4">
-          <div className="bg-white w-full rounded p-4 mb-4">
+          <div className="bg-white w-full rounded shadow p-4 mb-4">
             <h2 className="text-lg font-bold border-b mb-2">タグ</h2>
             <ul className="px-2">
               {tags.map((tag) => {
@@ -46,7 +51,7 @@ const Home: VFC<Props> = ({ posts, tags, users, _count }) => {
               })}
             </ul>
           </div>
-          <div className="bg-white w-full rounded p-4 mb-4">
+          <div className="bg-white w-full rounded shadow p-4 mb-4">
             <h2 className="text-lg font-bold border-b mb-2">
               ユーザー
               <span className="text-xs font-light ml-2">(週間)</span>
