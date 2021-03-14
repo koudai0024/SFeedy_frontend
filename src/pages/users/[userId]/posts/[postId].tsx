@@ -4,6 +4,8 @@ import { format } from "date-fns";
 import hljs from "highlight.js";
 import marked from "marked";
 import type { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
+import Link from "next/link";
 import type { VFC } from "react";
 
 type Props = {
@@ -32,23 +34,46 @@ const PostPage: VFC<Props> = (props) => {
     $(elm).addClass("hljs");
   });
   return (
-    <div>
-      <div className="w-full xl:w-11/12 max-w-screen-xl text-center mx-auto mt-4 md:mt-8 mb-3 md:mb-6 px-2 xl:px-0">
-        <h1 className="inline-block text-xl md:text-3xl font-bold text-left mb-2 md:mb-4">
-          {post?.title}
-        </h1>
-        <p className="text-xs md:text-base font-bold mb-1 md:mb-2">
-          {post?.user.name}
-        </p>
-        <p className="text-xs md:text-base text-gray-800">
-          {format(new Date(post?.createdAt || ""), "yyyy年M月d日")}
-        </p>
+    <>
+      <Head>
+        <title>{post.title} | SFeedy - 簡単に始められる技術ブログ</title>
+        <meta
+          name="description"
+          content={marked(post.body)
+            .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
+            .substr(0, 150)}
+        />
+        <meta
+          property="og:title"
+          content={`${post.title} | SFeedy - 簡単に始められる技術ブログ`}
+        />
+        <meta
+          property="og:description"
+          content={marked(post.body)
+            .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
+            .substr(0, 150)}
+        />
+      </Head>
+      <div>
+        <div className="w-full xl:w-11/12 max-w-screen-xl text-center mx-auto mt-4 md:mt-8 mb-3 md:mb-6 px-2 xl:px-0">
+          <h1 className="inline-block text-xl md:text-3xl font-bold text-left mb-2 md:mb-4">
+            {post?.title}
+          </h1>
+          <p className="text-xs md:text-base font-bold mb-1 md:mb-2">
+            <Link href="/users/[userId]" as={`/users/${post.userId}`}>
+              {post?.user.name}
+            </Link>
+          </p>
+          <p className="text-xs md:text-base text-gray-800">
+            {format(new Date(post?.createdAt || ""), "yyyy年M月d日")}
+          </p>
+        </div>
+        <div
+          className="markdown-body bg-white w-full max-w-screen-xl mx-auto shadow px-1 md:px-2 py-2 md:py-4"
+          dangerouslySetInnerHTML={{ __html: $.html() }}
+        ></div>
       </div>
-      <div
-        className="markdown-body bg-white w-full max-w-screen-xl mx-auto shadow px-1 md:px-2 py-2 md:py-4"
-        dangerouslySetInnerHTML={{ __html: $.html() }}
-      ></div>
-    </div>
+    </>
   );
 };
 
