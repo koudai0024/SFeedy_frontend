@@ -6,6 +6,8 @@ class Document extends NextDocument {
       <Html lang="ja">
         <Head>
           <title>SFeedy</title>
+          <meta name="description" content="ok" />
+          <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_API_URL} />
         </Head>
         <body>
           <Main />

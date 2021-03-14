@@ -10,17 +10,21 @@ type Props = {
   post: PostType;
 };
 
-const PostPage: VFC<Props> = ({ post }) => {
+const PostPage: VFC<Props> = (props) => {
+  const post = props.post;
+
   marked.setOptions({
     headerIds: false,
   });
-  const $ = cheerio.load(marked(post.body));
+  const $ = cheerio.load(marked(post?.body || ""));
   $("a").each((_, elm) => {
     $(elm).attr("rel", "noopener noreferrer");
     $(elm).attr("target", "_blank");
   });
   $("img").each((_, elm) => {
     $(elm).attr("loading", "lazy");
+    $(elm).attr("width", "1000");
+    $(elm).attr("height", "1000");
   });
   $("pre code").each((_, elm) => {
     const result = hljs.highlightAuto($(elm).text());
@@ -31,13 +35,13 @@ const PostPage: VFC<Props> = ({ post }) => {
     <div>
       <div className="w-full xl:w-11/12 max-w-screen-xl text-center mx-auto mt-4 md:mt-8 mb-3 md:mb-6 px-2 xl:px-0">
         <h1 className="inline-block text-xl md:text-3xl font-bold text-left mb-2 md:mb-4">
-          {post.title}
+          {post?.title}
         </h1>
         <p className="text-xs md:text-base font-bold mb-1 md:mb-2">
-          {post.user.name}
+          {post?.user.name}
         </p>
         <p className="text-xs md:text-base text-gray-800">
-          {format(new Date(post.createdAt), "yyyy年M月d日")}
+          {format(new Date(post?.createdAt || ""), "yyyy年M月d日")}
         </p>
       </div>
       <div

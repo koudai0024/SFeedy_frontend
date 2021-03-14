@@ -69,7 +69,7 @@ const Home: VFC<Props> = (props) => {
                       href="/tags/[tagId]/posts"
                       as={`/tags/${tag.id}/posts`}
                     >
-                      <a className="flex justify-between items-center text-sm mb-1">
+                      <a className="flex justify-between items-center text-sm py-1 mb-1">
                         <span>{tag.name}</span>
                         <span>{tag.postCount}件</span>
                       </a>
@@ -89,7 +89,7 @@ const Home: VFC<Props> = (props) => {
                 return (
                   <li key={user.id}>
                     <Link href="/users/[userId]" as={`/users/${user.id}`}>
-                      <a className="flex justify-between items-center text-sm mb-1">
+                      <a className="flex justify-between items-center text-sm py-1 mb-1">
                         <span>{user.name}</span>
                         <span>{user.postCount}件</span>
                       </a>

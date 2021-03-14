@@ -59,7 +59,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
     <div className="bg-white w-full rounded-lg shadow mb-2 md:mb-4 p-2 md:p-4">
       <div>
         <Link href="/users/[userId]" as={`/users/${post.userId}`}>
-          <a className="flex items-center mb-1 md:mb-2">
+          <a className="flex items-center mb-1 md:mb-2 py-1">
             <div className="overflow-hidden rounded-full w-4 md:w-6 h-4 md:h-6 mr-2 md:mr-3 ">
               <img
                 src={post.user.profile.image}
@@ -78,21 +78,23 @@ export const PostCard: VFC<Props> = ({ post }) => {
           </a>
         </Link>
       </div>
-      <h2 className="md:text-2xl font-bold line-clamp-1 mb-1 md:mb-2">
-        <Link
-          href="/users/[userId]/posts/[postId]"
-          as={`/users/${post.userId}/posts/${post.id}`}
-        >
-          {post.title}
-        </Link>
-      </h2>
-      <p className="text-sm md:text-base line-clamp-2">
-        {marked(post.body)
-          .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
-          .substr(0, 150)}
-      </p>
+      <Link
+        href="/users/[userId]/posts/[postId]"
+        as={`/users/${post.userId}/posts/${post.id}`}
+      >
+        <a>
+          <h2 className="md:text-2xl font-bold line-clamp-1 mb-1 md:mb-2">
+            {post.title}
+          </h2>
+          <p className="text-sm md:text-base line-clamp-2">
+            {marked(post.body)
+              .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
+              .substr(0, 150)}
+          </p>
+        </a>
+      </Link>
       <div className="flex items-center justify-between border-t mt-2 pt-1">
-        <ul className="flex items-center mb-1">
+        <ul className="flex items-center mb-1 py-1">
           <li className="text-xs md:text-sm font-light line-clamp-1 mr-1">
             <svg
               className="w-4 h-4"
