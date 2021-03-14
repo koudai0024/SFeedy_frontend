@@ -2,7 +2,7 @@ import axios from "axios";
 import type { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import type { VFC } from "react";
+import type { ReactElement, VFC } from "react";
 import { Pagination } from "src/components/Sheard/Pagination";
 import { PostCard } from "src/components/Sheard/PostCard";
 
@@ -20,7 +20,7 @@ const TagPosts: VFC<Props> = ({ posts, tags, tag, count }) => {
       <h2 className="text-3xl font-bold mb-4 md:mb-6">{tag?.name}の投稿一覧</h2>
       <div className="flex items-start justify-between w-full">
         <div className="flex-1 w-full">
-          {posts.map((post) => {
+          {posts.map<ReactElement>((post) => {
             return <PostCard key={post.id} post={post} />;
           })}
           <Pagination
@@ -37,7 +37,7 @@ const TagPosts: VFC<Props> = ({ posts, tags, tag, count }) => {
                 return (
                   <li key={tag.id}>
                     <Link
-                      href="/tags/[tag_id]/posts"
+                      href="/tags/[tagId]/posts"
                       as={`/tags/${tag.id}/posts`}
                     >
                       <a className="flex justify-between items-center text-sm mb-1">

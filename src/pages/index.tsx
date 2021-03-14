@@ -2,11 +2,12 @@ import axios from "axios";
 import type { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { VFC } from "react";
+import type { ReactElement, VFC } from "react";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { Pagination } from "src/components/Sheard/Pagination";
 import { PostCard } from "src/components/Sheard/PostCard";
 import { MainHeading } from "src/components/Sheard/Typography";
+import useSWR from "swr";
 
 type Props = {
   posts: PostType[];
@@ -15,9 +16,36 @@ type Props = {
   count: number;
 };
 
-const Home: VFC<Props> = ({ posts, tags, users, count }) => {
+const Home: VFC<Props> = (props) => {
   const router = useRouter();
   const currentPage = parseInt(`${router.query.page}`) || 1;
+
+  const page: number = Number(router.query.page) || 1;
+  const limit = 10;
+  const offset = page * limit - limit;
+  const { data: postsInfo } = useSWR(
+    `/api/v1/posts?offset=${offset}&limit=${limit}`,
+    {
+      initialData: { posts: props.posts, count: props.count },
+      shouldRetryOnError: true,
+    }
+  );
+  const posts = postsInfo?.posts;
+  const count = postsInfo?.count || 1;
+
+  const { data: users } = useSWR("/api/v1/users?limit=10", {
+    initialData: props.users,
+    shouldRetryOnError: true,
+  });
+
+  const { data: tags } = useSWR("/api/v1/tags?limit=10", {
+    initialData: props.tags,
+    shouldRetryOnError: true,
+  });
+
+  // eslint-disable-next-line no-console
+  console.log(users);
+
   return (
     <CommonContainer>
       <MainHeading variant="h1" className="mb-4">
@@ -25,7 +53,7 @@ const Home: VFC<Props> = ({ posts, tags, users, count }) => {
       </MainHeading>
       <div className="flex flex-col lg:flex-row items-start justify-between w-full">
         <div className="flex-1 w-full">
-          {posts.map((post) => {
+          {posts?.map<ReactElement>((post) => {
             return <PostCard key={post.id} post={post} />;
           })}
           <Pagination count={count} currentPage={currentPage} path="" />
@@ -34,7 +62,7 @@ const Home: VFC<Props> = ({ posts, tags, users, count }) => {
           <div className="bg-white w-full rounded shadow p-4 mb-4">
             <h2 className="text-lg font-bold border-b mb-2">タグ</h2>
             <ul className="px-2">
-              {tags.map((tag) => {
+              {tags?.map((tag) => {
                 return (
                   <li key={tag.id}>
                     <Link
@@ -57,7 +85,7 @@ const Home: VFC<Props> = ({ posts, tags, users, count }) => {
               <span className="text-xs font-light ml-2">(週間)</span>
             </h2>
             <ul className="px-2">
-              {users.map((user) => {
+              {users?.map((user) => {
                 return (
                   <li key={user.id}>
                     <Link href="/users/[userId]" as={`/users/${user.id}`}>

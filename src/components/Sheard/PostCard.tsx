@@ -58,13 +58,16 @@ export const PostCard: VFC<Props> = ({ post }) => {
   return (
     <div className="bg-white w-full rounded-lg shadow mb-2 md:mb-4 p-2 md:p-4">
       <div>
-        <Link href="/users/[user_id]" as={`/users/${post.userId}`}>
+        <Link href="/users/[userId]" as={`/users/${post.userId}`}>
           <a className="flex items-center mb-1 md:mb-2">
             <div className="overflow-hidden rounded-full w-4 md:w-6 h-4 md:h-6 mr-2 md:mr-3 ">
               <img
                 src={post.user.profile.image}
-                alt=""
+                alt="ユーザー画像"
                 className="w-4 md:w-6 h-4 md:h-6 object-cover object-center"
+                width="24"
+                height="24"
+                loading="lazy"
               />
             </div>
             <p className="text-xs md:text-sm font-bold">{post.user.name}</p>
@@ -126,6 +129,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
               },
             ])}
             onClick={handleLike}
+            aria-label="Like Button"
           >
             <svg
               className="w-5 h-5"

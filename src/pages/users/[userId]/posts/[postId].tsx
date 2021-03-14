@@ -52,7 +52,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const res = await axios.get("/api/v1/posts?limit=-1");
   const { posts } = await res.data;
   const paths: Array<string> = posts.map((repo: UserType) => {
-    return `/users/[user_id]/posts/${repo.id}`;
+    return `/users/[userId]/posts/${repo.id}`;
   });
   return {
     paths,

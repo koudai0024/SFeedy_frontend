@@ -62,17 +62,14 @@ const Dashboard: VFC<Props> = ({ posts }) => {
               <tr key={post.id} className=" bg-white border-b border-gray-200">
                 <td className="px-4 py-2r">
                   <Link
-                    href="/[user_id]/posts/[post_id]"
+                    href="/[userId]/posts/[postId]"
                     as={`/${post.userId}/posts/${post.id}`}
                   >
                     <a className="line-clamp-1">{post.title}</a>
                   </Link>
                 </td>
                 <td className="text-right block py-2">
-                  <Link
-                    href="/dashboard/[post_id]"
-                    as={`/dashboard/${post.id}`}
-                  >
+                  <Link href="/dashboard/[postId]" as={`/dashboard/${post.id}`}>
                     <a className="inline-block whitespace-nowrap bg-indigo-400 px-4 py-1 text-xs text-white rounded">
                       編集
                     </a>

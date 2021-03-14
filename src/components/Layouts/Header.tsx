@@ -87,10 +87,11 @@ const HeaderLogined = () => {
             <img
               className="object-cover object-center md:w-12 w-8 md:h-12 h-8"
               src={user.image || ""}
-              width="800"
-              height="800"
+              width="48"
+              height="48"
               id="image-btn"
-              alt=""
+              alt="ユーザープロフィール画像"
+              loading="lazy"
             />
           </button>
         </div>
