@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
-import type { VFC } from "react";
+import type { ReactElement, VFC } from "react";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { Pagination } from "src/components/Sheard/Pagination";
 import { PostCard } from "src/components/Sheard/PostCard";
@@ -21,7 +21,7 @@ const UserPosts: VFC<Props> = ({ user, posts, count }) => {
         {user.name}さんの投稿一覧
       </h2>
       <div className="w-full">
-        {posts.map((post) => {
+        {posts.map<ReactElement>((post) => {
           return <PostCard key={post.id} post={post} />;
         })}
         <Pagination

@@ -5,12 +5,11 @@ import "highlight.js/styles/github-gist.css";
 import axios from "axios";
 import type { NextPageContext } from "next";
 import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import type { ReactChild, VFC } from "react";
-import { useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import { Layout } from "src/components/Layouts/Layout";
+import { SWRConfig } from "swr";
 
 //axios default state
 axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_API_URL}`;
@@ -34,25 +33,7 @@ const SafeHydrate: VFC<{ children: ReactChild }> = ({ children }) => {
   );
 };
 
-const noCheckUrl = ["/", "/signin", "/login"];
-
 const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
-  const router = useRouter();
-  const cookies = parseCookies(ctx);
-  useEffect(() => {
-    router.beforePopState((url) => {
-      if (!noCheckUrl.includes(`${url}`)) {
-        if (typeof cookies.auth === "undefined") {
-          // CSR用リダイレクト処理
-          window.location.href = "/";
-          return false;
-        }
-      }
-      return true;
-    });
-    return;
-  }, []);
-
   const initializeState = ({ set }: any) => {
     const cookie = parseCookies(ctx);
     if (cookie?.user) {
@@ -66,41 +47,27 @@ const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
 
   return (
     <RecoilRoot initializeState={initializeState}>
-      <SafeHydrate>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </SafeHydrate>
+      <SWRConfig
+        value={{
+          fetcher: (url: string) => {
+            return axios(url)
+              .then((r) => {
+                return r.data;
+              })
+              .catch(() => {
+                return;
+              });
+          },
+        }}
+      >
+        <SafeHydrate>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </SafeHydrate>
+      </SWRConfig>
     </RecoilRoot>
   );
-};
-
-MyApp.getInitialProps = async (appContext: any) => {
-  // SSR用認証チェック
-
-  const cookies = parseCookies(appContext.ctx);
-  // ログイン画面とエラー画面遷移時のみ認証チェックを行わない
-  if (!noCheckUrl.includes(appContext.ctx.pathname)) {
-    if (typeof cookies.auth === "undefined") {
-      // SSR or CSRを判定
-      const isServer = typeof window === "undefined";
-      if (isServer) {
-        appContext.ctx.res.statusCode = 302;
-        appContext.ctx.res.setHeader("Location", "/");
-        return {};
-      } else {
-        return;
-      }
-    }
-  }
-  return {
-    pageProps: {
-      ...(appContext.Component.getInitialProps
-        ? await appContext.Component.getInitialProps(appContext.ctx)
-        : {}),
-      pathname: appContext.ctx.pathname,
-    },
-  };
 };
 
 export default MyApp;

@@ -9,7 +9,9 @@ const Login = () => {
   const router = useRouter();
   const handleLogin = () => {
     let accessToken: string;
-    const childwin = window.open("https://sfeedy.tk/api/v1/auth/google");
+    const childwin = window.open(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/google`
+    );
     window.addEventListener("message", (e) => {
       if (e.data.message) {
         accessToken = e.data.message;
