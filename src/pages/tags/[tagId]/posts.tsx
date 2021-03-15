@@ -18,7 +18,7 @@ const TagPosts: VFC<Props> = ({ posts, tags, tag, count }) => {
   return (
     <div className="w-full xl:w-11/12 max-w-screen-xl mx-auto mt-4 md:mt-8 px-2 xl:px-0">
       <h2 className="text-3xl font-bold mb-4 md:mb-6">{tag?.name}の投稿一覧</h2>
-      <div className="flex items-start justify-between w-full">
+      <div className="flex flex-col lg:flex-row items-start justify-between w-full">
         <div className="flex-1 w-full">
           {posts.map<ReactElement>((post) => {
             return <PostCard key={post.id} post={post} />;
@@ -29,7 +29,7 @@ const TagPosts: VFC<Props> = ({ posts, tags, tag, count }) => {
             path={`/tags/${tag?.id}/posts`}
           />
         </div>
-        <div className="w-72 ml-4">
+        <div className="w-full lg:w-72 lg:ml-4">
           <div className="bg-white w-full rounded p-4">
             <h2 className="text-lg font-bold border-b mb-2">タグ</h2>
             <ul className="px-2">

@@ -18,11 +18,12 @@ type Props = {
 
 const Home: VFC<Props> = (props) => {
   const router = useRouter();
-  const currentPage = parseInt(`${router.query.page}`) || 1;
 
+  const currentPage = parseInt(`${router.query.page}`) || 1;
   const page: number = Number(router.query.page) || 1;
   const limit = 10;
   const offset = page * limit - limit;
+
   const { data: postsInfo } = useSWR(
     `/api/v1/posts?offset=${offset}&limit=${limit}`,
     {
@@ -32,19 +33,14 @@ const Home: VFC<Props> = (props) => {
   );
   const posts = postsInfo?.posts;
   const count = postsInfo?.count || 1;
-
   const { data: users } = useSWR("/api/v1/users?limit=10", {
     initialData: props.users,
     shouldRetryOnError: true,
   });
-
   const { data: tags } = useSWR("/api/v1/tags?limit=10", {
     initialData: props.tags,
     shouldRetryOnError: true,
   });
-
-  // eslint-disable-next-line no-console
-  console.log(users);
 
   return (
     <CommonContainer>
