@@ -5,10 +5,13 @@ import "highlight.js/styles/github-gist.css";
 import axios from "axios";
 import type { NextPageContext } from "next";
 import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import type { ReactChild, VFC } from "react";
+import { useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import { Layout } from "src/components/Layouts/Layout";
+import * as gtag from "src/lib/analytics/google";
 import { SWRConfig } from "swr";
 
 //axios default state
@@ -44,6 +47,17 @@ const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
       }
     }
   };
+
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <RecoilRoot initializeState={initializeState}>
