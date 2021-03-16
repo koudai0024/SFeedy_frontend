@@ -1,12 +1,19 @@
 import { atom } from "recoil";
 
-export const userState = atom({
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  accessToken: string;
+};
+
+export const userState = atom<User | null>({
   key: "userInfoState",
-  default: {
-    id: "",
-    name: "",
-    email: "",
-    image: "",
-    accessToken: "",
-  },
+  default: null,
 });
+// id: "",
+//     name: "",
+//     email: "",
+//     image: "",
+//     accessToken: "",

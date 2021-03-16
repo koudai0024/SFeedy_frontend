@@ -11,7 +11,7 @@ const UpdatePost = () => {
 
   useEffect(() => {
     setIsLoad(true);
-    if (user.accessToken) {
+    if (user) {
       axios
         .get(`/api/v1/users/posts/${router.query.postId}`, {
           headers: {
@@ -42,7 +42,7 @@ const UpdatePost = () => {
   const [tags, setTags] = useState("");
   const [isLoad, setIsLoad] = useState(false);
 
-  if (!user.id) {
+  if (!user) {
     router.push("/");
   }
 
@@ -61,7 +61,7 @@ const UpdatePost = () => {
     axios
       .put(`/api/v1/posts/${router.query.postId}`, data, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${user?.accessToken}`,
         },
       })
       .then(() => {

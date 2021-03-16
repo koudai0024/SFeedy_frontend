@@ -53,10 +53,42 @@ const PostPage: VFC<Props> = (props) => {
             .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
             .substr(0, 150)}
         />
+        <meta property="og:title" content={post.title} />
+        <meta
+          property="og:description"
+          content={marked(post.body)
+            .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
+            .substr(0, 150)}
+        />
+        <meta property="og:type" content="blog" />
+        <meta property="og:url" content="https://sfeedy.page" />
+        <meta
+          property="og:image"
+          content={`https://res.cloudinary.com/dg1y5peif/image/upload/l_text:Sawarabi Gothic_50_bold:${post.title},co_rgb:333,w_500,c_fit/v1614235864/ogp/IzebX4sI_ah0pt1.png`}
+        />
+        <meta property="og:site_name" content={post.title} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@tcr_jp" />
+        <meta
+          name="twitter:url"
+          content={`https://res.cloudinary.com/dg1y5peif/image/upload/l_text:Sawarabi Gothic_50_bold:${post.title},co_rgb:333,w_500,c_fit/v1614235864/ogp/IzebX4sI_ah0pt1.png`}
+        />
+        <meta name="twitter:title" content={post.title} />
+        <meta
+          name="twitter:description"
+          content={marked(post.body)
+            .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
+            .substr(0, 150)}
+        />
+        <meta
+          name="twitter:image"
+          content={`https://res.cloudinary.com/dg1y5peif/image/upload/l_text:Sawarabi Gothic_50_bold:${post.title},co_rgb:333,w_500,c_fit/v1614235864/ogp/IzebX4sI_ah0pt1.png`}
+        />
+        {/* <link rel="canonical" href={url} /> */}
       </Head>
       <div>
         <div className="w-full xl:w-11/12 max-w-screen-xl text-center mx-auto mt-4 md:mt-8 mb-3 md:mb-6 px-2 xl:px-0">
-          <h1 className="inline-block text-xl md:text-3xl font-bold text-left mb-2 md:mb-4">
+          <h1 className="inline-block text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4">
             {post?.title}
           </h1>
           <p className="text-xs md:text-base font-bold mb-1 md:mb-2">
