@@ -50,6 +50,41 @@ class Document extends NextDocument {
           <link rel="icon" sizes="192x192" href="/icon-192x192.png" />
           <link rel="icon" href="/favicon.ico" />
           <link rel="manifest" href="/manifest.json" />
+          <meta
+            property="og:title"
+            content={"SFeedy - 簡単に始められる技術ブログ"}
+          />
+          <meta property="og:description" content="" />
+          <meta
+            property="og:title"
+            content="SFeedy - 簡単に始められる技術ブログ"
+          />
+          <meta property="og:description" content="" />
+          <meta property="og:type" content="blog" />
+          <meta property="og:url" content="https://sfeedy.page" />
+          <meta
+            property="og:image"
+            content={`https://res.cloudinary.com/dg1y5peif/image/upload/l_text:Sawarabi Gothic_50_bold:SFeedy - 簡単に始められる技術ブログ,co_rgb:333,w_500,c_fit/v1614235864/ogp/IzebX4sI_ah0pt1.png`}
+          />
+          <meta
+            property="og:site_name"
+            content="SFeedy - 簡単に始められる技術ブログ"
+          />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@tcr_jp" />
+          <meta
+            name="twitter:url"
+            content={`https://res.cloudinary.com/dg1y5peif/image/upload/l_text:Sawarabi Gothic_50_bold:SFeedy - 簡単に始められる技術ブログ,co_rgb:333,w_500,c_fit/v1614235864/ogp/IzebX4sI_ah0pt1.png`}
+          />
+          <meta
+            name="twitter:title"
+            content="SFeedy - 簡単に始められる技術ブログ"
+          />
+          <meta name="twitter:description" content="" />
+          <meta
+            name="twitter:image"
+            content={`https://res.cloudinary.com/dg1y5peif/image/upload/l_text:Sawarabi Gothic_50_bold:SFeedy - 簡単に始められる技術ブログ,co_rgb:333,w_500,c_fit/v1614235864/ogp/IzebX4sI_ah0pt1.png`}
+          />
           <script
             async={true}
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
