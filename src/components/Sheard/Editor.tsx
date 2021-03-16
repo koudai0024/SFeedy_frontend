@@ -17,14 +17,7 @@ type Props = {
   setTags: Dispatch<SetStateAction<string>>;
 };
 
-export const Editor: VFC<Props> = ({
-  title,
-  setTitle,
-  body,
-  setBody,
-  tags,
-  setTags,
-}) => {
+export const Editor: VFC<Props> = (props) => {
   const [isLoad, setIsLoad] = useState(false); //Todo Loading Icon 追加
   const user = useRecoilValue(userState);
 
@@ -45,11 +38,11 @@ export const Editor: VFC<Props> = ({
     formData.append("image", files);
     axios
       .post("/api/v1/upload/article", formData, {
-        headers: { Authorization: `Bearer ${user.accessToken}` },
+        headers: { Authorization: `Bearer ${user?.accessToken}` },
       })
       .then((res) => {
-        const oldValue = body;
-        setBody(oldValue + `![](${res.data.url})`);
+        const oldValue = props.body;
+        props.setBody(oldValue + `![](${res.data.url})`);
         setIsLoad(false);
       })
       .catch(() => {
@@ -58,19 +51,19 @@ export const Editor: VFC<Props> = ({
     return;
   };
   const handleTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
+    props.setTitle(e.target.value);
   };
   const handleTags = (e: ChangeEvent<HTMLInputElement>) => {
-    setTags(e.target.value);
+    props.setTags(e.target.value);
   };
   const handleBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setBody(e.target.value);
+    props.setBody(e.target.value);
   };
 
   marked.setOptions({
     headerIds: false,
   });
-  const $ = cheerio.load(marked(body));
+  const $ = cheerio.load(marked(props.body));
   $("a").each((_, elm) => {
     $(elm).attr("rel", "noopener noreferrer");
     $(elm).attr("target", "_blank");
@@ -88,14 +81,14 @@ export const Editor: VFC<Props> = ({
       <input
         type="text"
         placeholder="タイトルを入力"
-        value={title}
+        value={props.title}
         onChange={handleTitle}
         className="bg-white text-xl md:text-2xl w-full h-10 rounded p-2 mb-2"
       />
       <input
         type="text"
         placeholder="タグを入力 空白で区切り5つまで設定できます"
-        value={tags}
+        value={props.tags}
         onChange={handleTags}
         className="bg-white text-sm md:text-base w-full h-10 rounded p-2 mb-2"
       />
@@ -175,7 +168,7 @@ export const Editor: VFC<Props> = ({
         >
           <textarea
             placeholder="本文を入力してください"
-            value={body}
+            value={props.body}
             onChange={handleBody}
             className={cc([
               "resize-none overflow-scroll box-border w-full h-full p-4",

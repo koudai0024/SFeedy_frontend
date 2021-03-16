@@ -20,7 +20,7 @@ const Dashboard: VFC<Props> = ({ posts }) => {
       axios
         .delete(`/api/v1/posts/${id}`, {
           headers: {
-            Authorization: `Bearer ${user.accessToken}`,
+            Authorization: `Bearer ${user?.accessToken}`,
           },
         })
         .then(() => {

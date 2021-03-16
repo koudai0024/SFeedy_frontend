@@ -12,7 +12,7 @@ const PostNew = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
-  if (!user.id) {
+  if (!user) {
     router.push("/");
   }
 
@@ -29,7 +29,7 @@ const PostNew = () => {
     axios
       .post("/api/v1/posts", data, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${user?.accessToken}`,
         },
       })
       .then(() => {

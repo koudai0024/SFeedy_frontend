@@ -33,7 +33,7 @@ const MyPage: VFC<Props> = ({ user, posts, likedPosts }) => {
   const router = useRouter();
   const [openTab, setOpenTab] = useState(1);
 
-  if (!accessUser.id && typeof window !== "undefined") {
+  if (!accessUser && typeof window !== "undefined") {
     router.push("/");
   }
 

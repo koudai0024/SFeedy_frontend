@@ -17,7 +17,7 @@ const Profile = () => {
   const [isLoad, setIsLoad] = useState(false);
 
   useEffect(() => {
-    if (user.accessToken) {
+    if (user) {
       setImage(`${user.image}`);
       setName(`${user.name}`);
       axios
@@ -35,7 +35,7 @@ const Profile = () => {
     }
   }, []);
 
-  if (!user.id) {
+  if (!user) {
     router.push("/");
   }
 
@@ -50,7 +50,7 @@ const Profile = () => {
     axios
       .post("/api/v1/profile", data, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${user?.accessToken}`,
         },
       })
       .then(() => {
@@ -85,7 +85,7 @@ const Profile = () => {
     axios
       .post("/api/v1/upload/profile", formData, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${user?.accessToken}`,
         },
       })
       .then((res) => {

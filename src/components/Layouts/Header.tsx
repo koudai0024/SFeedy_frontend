@@ -36,8 +36,8 @@ export const Header = () => {
           </Link> */}
         </div>
         <div className="flex items-center">
-          {user.id && <HeaderLogined />}
-          {!user.id && (
+          {user && <HeaderLogined />}
+          {!user && (
             <Link href="/login">
               <a className="bg-indigo-400 block border-2 border-indigo-400 rounded text-sm md:text-base text-white ml-4 px-4 py-2">
                 ログイン
@@ -86,7 +86,7 @@ const HeaderLogined = () => {
             <span className="sr-only">Open user menu</span>
             <img
               className="object-cover object-center md:w-12 w-8 md:h-12 h-8"
-              src={user.image || ""}
+              src={user?.image || ""}
               width="48"
               height="48"
               id="image-btn"
