@@ -56,7 +56,7 @@ const PostPage: VFC<Props> = (props) => {
       </Head>
       <div>
         <div className="w-full xl:w-11/12 max-w-screen-xl text-center mx-auto mt-4 md:mt-8 mb-3 md:mb-6 px-2 xl:px-0">
-          <h1 className="inline-block text-xl md:text-3xl font-bold text-left mb-2 md:mb-4">
+          <h1 className="inline-block text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4">
             {post?.title}
           </h1>
           <p className="text-xs md:text-base font-bold mb-1 md:mb-2">
