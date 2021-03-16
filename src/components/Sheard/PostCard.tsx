@@ -17,7 +17,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
   const [likeCount, setLikeCount] = useState(post.likeCount || 0);
   const user = useRecoilValue(userState);
   useEffect(() => {
-    if (user.accessToken) {
+    if (user) {
       axios
         .get(`/api/v1/likes/${post.id}/is_likes`, {
           headers: {
@@ -31,7 +31,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
   }, []);
 
   const handleLike = async () => {
-    if (user.accessToken) {
+    if (user) {
       const res = await axios.get(`/api/v1/likes/set/${post.id}`, {
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
