@@ -40,8 +40,11 @@ const Login = () => {
               "user",
               `${JSON.stringify({ ...res.data, accessToken })}`
             );
+            router.push("/");
+          })
+          .catch(() => {
+            alert("login error");
           });
-        router.push("/");
       }
     }, 1000);
   };
