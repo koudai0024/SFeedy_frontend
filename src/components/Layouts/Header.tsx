@@ -13,11 +13,19 @@ export const Header = () => {
     <header className="bg-white w-full shadow">
       <div className="flex items-center justify-between w-full xl:w-11/12 max-w-screen-xl mx-auto px-2 xl:px-0 py-2 md:py-4">
         <div className="flex items-center">
-          <p className="text-2xl md:text-3xl font-bold">
+          <div className="">
             <Link href="/">
-              <a>SFeedy</a>
+              <a>
+                <img
+                  src="/image/poston.png"
+                  alt="postON"
+                  className="h-6 md:h-8 w-auto"
+                  width="140"
+                  height="32"
+                />
+              </a>
             </Link>
-          </p>
+          </div>
           {/* <Link href="/search">
             <a className="text-indigo-500 border-2 border-indigo-500 rounded ml-4">
               <svg

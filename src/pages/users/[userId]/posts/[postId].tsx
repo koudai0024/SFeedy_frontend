@@ -36,7 +36,7 @@ const PostPage: VFC<Props> = (props) => {
   return (
     <>
       <Head>
-        <title>{post.title} | SFeedy - 簡単に始められる技術ブログ</title>
+        <title>{post.title} | PostON - 簡単に始められる技術ブログ</title>
         <meta
           name="description"
           content={marked(post.body)
@@ -45,7 +45,7 @@ const PostPage: VFC<Props> = (props) => {
         />
         <meta
           property="og:title"
-          content={`${post.title} | SFeedy - 簡単に始められる技術ブログ`}
+          content={`${post.title} | PostON - 簡単に始められる技術ブログ`}
         />
         <meta
           property="og:description"
