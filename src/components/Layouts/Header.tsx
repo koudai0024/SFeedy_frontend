@@ -94,7 +94,7 @@ const HeaderLogined = () => {
             <span className="sr-only">Open user menu</span>
             <img
               className="object-cover object-center md:w-12 w-8 md:h-12 h-8"
-              src={user?.image || ""}
+              src={user?.image}
               width="48"
               height="48"
               id="image-btn"
