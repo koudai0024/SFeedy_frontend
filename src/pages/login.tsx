@@ -68,6 +68,7 @@ const Login = () => {
           image: res.data.user.profile.image,
           accessToken: res.data.token,
         });
+        setCookie(null, "auth", res.data.token);
         setCookie(
           null,
           "user",
