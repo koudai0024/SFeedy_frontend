@@ -2,9 +2,8 @@
 	"name":				"PostON",
 	"short_name":		"PostON",
 	"description":		"PostON",
-	"start_url":		"https://poston.page",
+	"start_url":		"/",
 	"display":			"standalone",
-	"orientation":		"landscape-primary",
 	"background_color":	"#fff",
 	"theme_color":		"#fff",
 	"icons": [
