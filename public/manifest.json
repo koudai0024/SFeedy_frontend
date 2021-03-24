@@ -4,7 +4,7 @@
 	"description":		"PostON",
 	"start_url":		"https://poston.page",
 	"display":			"standalone",
-	"orientation":		"portrate-primary",
+	"orientation":		"landscape-primary",
 	"background_color":	"#fff",
 	"theme_color":		"#fff",
 	"icons": [
