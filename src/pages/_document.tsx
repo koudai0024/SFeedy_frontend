@@ -61,7 +61,7 @@ class Document extends NextDocument {
           />
           <meta property="og:description" content="" />
           <meta property="og:type" content="blog" />
-          <meta property="og:url" content="https://sfeedy.page" />
+          <meta property="og:url" content="https://poston.page" />
           <meta
             property="og:image"
             content={`https://res.cloudinary.com/dg1y5peif/image/upload/l_text:Sawarabi Gothic_50_bold:PostON - 簡単に始められる技術ブログ,co_rgb:333,w_500,c_fit/v1614235864/ogp/IzebX4sI_ah0pt1.png`}
