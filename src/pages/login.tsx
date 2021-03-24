@@ -72,7 +72,13 @@ const Login = () => {
         setCookie(
           null,
           "user",
-          `${JSON.stringify({ ...res.data, accessToken: res.data.token })}`
+          `${JSON.stringify({
+            id: res.data.user.id,
+            name: res.data.user.name,
+            email: res.data.user.email,
+            image: res.data.user.profile.image,
+            accessToken: res.data.token,
+          })}`
         );
         router.push("/");
       });
