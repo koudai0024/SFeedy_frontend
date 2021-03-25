@@ -55,8 +55,10 @@ const Home: VFC<Props> = (props) => {
           <Pagination count={count} currentPage={currentPage} path="" />
         </div>
         <div className="w-full lg:w-72 mt-8 lg:mt-0 ml-0 lg:ml-4">
-          <div className="bg-white w-full rounded shadow p-4 mb-4">
-            <h2 className="text-lg font-bold border-b mb-2">タグ</h2>
+          <div className="bg-gray-200 w-full rounded-2xl shadow p-4 mb-4">
+            <h2 className="text-lg font-bold border-b-4 border-white mb-2">
+              タグ
+            </h2>
             <ul className="px-2">
               {tags?.map((tag) => {
                 return (
@@ -75,8 +77,8 @@ const Home: VFC<Props> = (props) => {
               })}
             </ul>
           </div>
-          <div className="bg-white w-full rounded shadow p-4 mb-4">
-            <h2 className="text-lg font-bold border-b mb-2">
+          <div className="bg-gray-200 w-full rounded-2xl shadow p-4 mb-4">
+            <h2 className="text-lg font-bold border-b-4 border-white mb-2">
               ユーザー
               <span className="text-xs font-light ml-2">(週間)</span>
             </h2>
