@@ -6,5 +6,7 @@ module.exports = withPWA({
   pwa: {
     dest: "public", // swの出力ディレクトリ
     // runtimeCaching: []
+    sw: "service-worker.js",
+    register: true,
   },
 });
