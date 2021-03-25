@@ -56,7 +56,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
   };
 
   return (
-    <div className="bg-white w-full rounded-lg shadow mb-2 md:mb-4 p-2 md:p-4">
+    <div className="bg-gray-200 w-full rounded-xl shadow mb-2 md:mb-4 p-2 md:p-4">
       <div>
         <Link href="/users/[userId]" as={`/users/${post.userId}`}>
           <a className="flex items-center mb-1 md:mb-2 py-1">
@@ -93,7 +93,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
           </p>
         </a>
       </Link>
-      <div className="flex items-center justify-between border-t mt-2 pt-1">
+      <div className="flex items-center justify-between border-t border-black mt-2 pt-1">
         <ul className="flex items-center mb-1 py-1">
           <li className="text-xs md:text-sm font-light line-clamp-1 mr-1">
             <svg

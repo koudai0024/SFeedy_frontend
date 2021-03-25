@@ -59,7 +59,10 @@ const Dashboard: VFC<Props> = ({ posts }) => {
         <tbody>
           {posts.map((post) => {
             return (
-              <tr key={post.id} className=" bg-white border-b border-gray-200">
+              <tr
+                key={post.id}
+                className=" bg-gray-200 border-b-2 border-white "
+              >
                 <td className="px-4 py-2r">
                   <Link
                     href="/[userId]/posts/[postId]"

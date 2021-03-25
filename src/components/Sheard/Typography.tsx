@@ -12,7 +12,9 @@ export const MainHeading: VFC<MainHeadingProps> = ({
 }) => {
   const TagName = variant;
   return (
-    <TagName className={`text-2xl md:text-4xl font-bold ${className}`}>
+    <TagName
+      className={`text-2xl md:text-3xl text-gray-400 font-bold ${className}`}
+    >
       {children}
     </TagName>
   );

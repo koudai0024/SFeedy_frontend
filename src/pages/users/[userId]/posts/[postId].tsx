@@ -101,7 +101,7 @@ const PostPage: VFC<Props> = (props) => {
           </p>
         </div>
         <div
-          className="markdown-body bg-white w-full max-w-screen-xl mx-auto shadow px-1 md:px-2 py-2 md:py-4"
+          className="markdown-body w-full max-w-screen-xl mx-auto px-1 md:px-2 py-2 md:py-4"
           dangerouslySetInnerHTML={{ __html: $.html() }}
         ></div>
       </div>
