@@ -36,17 +36,14 @@ const PostPage: VFC<Props> = (props) => {
   return (
     <>
       <Head>
-        <title>{post.title} | PostON - 簡単に始められる技術ブログ</title>
+        <title>{post.title} | Giv</title>
         <meta
           name="description"
           content={marked(post.body)
             .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
             .substr(0, 150)}
         />
-        <meta
-          property="og:title"
-          content={`${post.title} | PostON - 簡単に始められる技術ブログ`}
-        />
+        <meta property="og:title" content={`${post.title} | Giv`} />
         <meta
           property="og:description"
           content={marked(post.body)
