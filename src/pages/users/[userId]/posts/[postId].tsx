@@ -36,14 +36,14 @@ const PostPage: VFC<Props> = (props) => {
   return (
     <>
       <Head>
-        <title>{post.title} | Giv</title>
+        <title>{post.title} | Gib</title>
         <meta
           name="description"
           content={marked(post.body)
             .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
             .substr(0, 150)}
         />
-        <meta property="og:title" content={`${post.title} | Giv`} />
+        <meta property="og:title" content={`${post.title} | Gib`} />
         <meta
           property="og:description"
           content={marked(post.body)
@@ -58,7 +58,7 @@ const PostPage: VFC<Props> = (props) => {
             .substr(0, 150)}
         />
         <meta property="og:type" content="blog" />
-        <meta property="og:url" content="https://giv-jp.com" />
+        <meta property="og:url" content="https://gib-jp.com" />
         <meta
           property="og:image"
           content={`https://res.cloudinary.com/dg1y5peif/image/upload/l_text:Sawarabi Gothic_50_bold:${post.title},co_rgb:333,w_500,c_fit/v1614235864/ogp/IzebX4sI_ah0pt1.png`}
