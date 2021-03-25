@@ -16,7 +16,7 @@ const UserPage: VFC<Props> = ({ user, posts, count }) => {
     <CommonContainer>
       <div className="flex flex-col lg:flex-row">
         <div className="w-full lg:w-72 mt-8 lg:mt-0 mr-0 lg:mr-4">
-          <div className="bg-white rounded flex flex-col items-center p-8 mb-4 lg:mb-0">
+          <div className="bg-gray-200 rounded flex flex-col items-center p-8 mb-4 lg:mb-0">
             <div className="w-40 h-40 rounded-full overflow-hidden mb-1">
               <img
                 className="w-40 h-40 object-cover object-center"

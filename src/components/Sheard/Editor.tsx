@@ -83,16 +83,16 @@ export const Editor: VFC<Props> = (props) => {
         placeholder="タイトルを入力"
         value={props.title}
         onChange={handleTitle}
-        className="bg-white text-xl md:text-2xl w-full h-10 rounded p-2 mb-2"
+        className="bg-gray-200 text-xl md:text-2xl w-full h-10 rounded p-2 mb-2"
       />
       <input
         type="text"
         placeholder="タグを入力 空白で区切り5つまで設定できます"
         value={props.tags}
         onChange={handleTags}
-        className="bg-white text-sm md:text-base w-full h-10 rounded p-2 mb-2"
+        className="bg-gray-200 text-sm md:text-base w-full h-10 rounded p-2 mb-2"
       />
-      <div className="bg-white flex border-t border-b border-black ">
+      <div className="bg-gray-200 flex ">
         <div className="box-border order-2 md:order-1 overflow-hidden w-2/4 md:border-r border-black">
           <div className="flex justify-end md:justify-start w-full px-2 py-1">
             <label
@@ -157,7 +157,7 @@ export const Editor: VFC<Props> = (props) => {
           </div>
         </div>
       </div>
-      <div className="bg-white flex h-content mb-4">
+      <div className="bg-white border-b border-black flex h-content mb-4">
         <div
           className={cc([
             "box-border overflow-hidden w-full md:w-2/4 h-full md:border-r border-black",

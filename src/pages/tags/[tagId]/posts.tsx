@@ -30,8 +30,10 @@ const TagPosts: VFC<Props> = ({ posts, tags, tag, count }) => {
           />
         </div>
         <div className="w-full lg:w-72 lg:ml-4">
-          <div className="bg-white w-full rounded p-4">
-            <h2 className="text-lg font-bold border-b mb-2">タグ</h2>
+          <div className="bg-gray-200 w-full rounded-2xl p-4">
+            <h2 className="text-lg font-bold border-b-2 border-white mb-2">
+              タグ
+            </h2>
             <ul className="px-2">
               {tags.map((tag) => {
                 return (

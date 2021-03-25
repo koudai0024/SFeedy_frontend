@@ -45,7 +45,7 @@ const PostNew = () => {
     <div className="mt-4">
       <button
         onClick={handleSend}
-        className="bg-indigo-400 block rounded text-sm md:text-base text-white ml-auto mr-8 mb-2 px-4 py-2"
+        className="bg-blue-400 block rounded-full text-sm md:text-base text-white ml-auto mr-8 mb-2 px-4 py-2"
       >
         送信
       </button>
