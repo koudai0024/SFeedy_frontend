@@ -33,10 +33,10 @@ class Document extends NextDocument {
             name="msapplication-square310x310logo"
             content="/site-tile-310x310.png"
           />
-          <meta name="msapplication-TileColor" content="#000" />
+          <meta name="msapplication-TileColor" content="#fff" />
           {/* safari */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="#000" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="#fff" />
           <meta name="apple-mobile-web-app-title" content="Gib" />
           <link
             rel="apple-touch-icon"
@@ -45,7 +45,7 @@ class Document extends NextDocument {
           />
           {/* 一般 */}
           <meta name="application-name" content="Gib" />
-          <meta name="theme-color" content="#000" />
+          <meta name="theme-color" content="#fff" />
           <meta name="description" content="this is Gib" />
           <link rel="icon" sizes="192x192" href="/icon-192x192.png" />
           <link rel="icon" href="/favicon.ico" />
