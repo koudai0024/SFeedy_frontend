@@ -94,8 +94,8 @@ export const PostCard: VFC<Props> = ({ post }) => {
         </a>
       </Link>
       <div className="flex items-center justify-between border-t border-black mt-2 pt-1">
-        <ul className="flex items-center mb-1 py-1">
-          <li className="text-xs md:text-sm font-light line-clamp-1 mr-1">
+        <ul className="flex items-center mb-1 py-1 space-x-2">
+          <li className="text-xs md:text-sm font-light line-clamp-1 ">
             <svg
               className="w-4 h-4"
               fill="currentColor"
@@ -113,7 +113,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
             return (
               <li
                 key={tag.id}
-                className="text-xs md:text-sm font-light line-clamp-1 mr-1"
+                className="text-xs md:text-sm font-light line-clamp-1 "
               >
                 <Link href="/tags/[tagId]/posts" as={`/tags/${tag.id}/posts`}>
                   <a>{tag.name}</a>
