@@ -5,7 +5,16 @@ module.exports = withPWA({
   poweredByHeader: false,
   pwa: {
     dest: "public", // swの出力ディレクトリ
-    // runtimeCaching: []
+    runtimeCaching: [
+      {
+        urlPattern: "/",
+        handler: "NetworkFirst",
+        options: {
+          cacheName: "start-url",
+        },
+      },
+    ],
+    cleanupOutdatedCaches: true,
     sw: "service-worker.js",
     register: true,
   },
