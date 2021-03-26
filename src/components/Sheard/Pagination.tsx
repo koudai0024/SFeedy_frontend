@@ -16,7 +16,7 @@ export const Pagination: VFC<Prosp> = ({ path, count, currentPage }) => {
   if (currentPage === 1) {
     return (
       <Link href={`${path}/?page=${currentPage + 1}`}>
-        <a className="bg-indigo-400 flex items-center justify-center mx-auto text-sm text-white w-32 h-9">
+        <a className="bg-blue-400 flex items-center justify-center mx-auto text-sm text-white rounded-full w-32 h-9">
           次のページ＞
         </a>
       </Link>
@@ -25,21 +25,21 @@ export const Pagination: VFC<Prosp> = ({ path, count, currentPage }) => {
   if (currentPage === page) {
     return (
       <Link href={`${path}/?page=${currentPage - 1}`}>
-        <a className="bg-indigo-400 flex items-center justify-center mx-auto text-sm text-white w-32 h-9">
+        <a className="bg-blue-400 flex items-center justify-center mx-auto text-sm text-white rounded-full w-32 h-9">
           ＜前のページ
         </a>
       </Link>
     );
   }
   return (
-    <div className="flex justify-center w-full mx-auto">
+    <div className="flex justify-center w-full mx-auto space-x-2">
       <Link href={`${path}/?page=${currentPage - 1}`}>
-        <a className="bg-indigo-400 flex items-center justify-center text-sm text-white w-32 h-9 mx-1">
+        <a className="bg-blue-400 flex items-center justify-center text-sm text-white rounded-full w-32 h-9 ">
           ＜前のページ
         </a>
       </Link>
       <Link href={`${path}/?page=${currentPage + 1}`}>
-        <a className="bg-indigo-400 flex items-center justify-center text-sm text-white w-32 h-9 mx-1">
+        <a className="bg-blue-400 flex items-center justify-center text-sm text-white rounded-full w-32 h-9 ">
           次のページ＞
         </a>
       </Link>

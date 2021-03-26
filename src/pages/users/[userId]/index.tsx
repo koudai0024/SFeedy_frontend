@@ -38,7 +38,7 @@ const UserPage: VFC<Props> = ({ user, posts, count }) => {
           {count > 10 && (
             <div className="w-full text-center">
               <Link href="/">
-                <a className="inline-block bg-indigo-400 font-bold text-white text-center rounded px-4 py-2">
+                <a className="inline-block bg-blue-400 font-bold text-white text-center rounded-full px-4 py-2">
                   {user?.name}さんの投稿一覧
                 </a>
               </Link>

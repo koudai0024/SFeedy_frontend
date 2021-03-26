@@ -11,8 +11,8 @@ export const Header = () => {
   const user = useRecoilValue(userState);
 
   return (
-    <header className="w-full mb-4">
-      <div className="flex items-center justify-between w-full xl:w-11/12 max-w-screen-xl mx-auto px-2 xl:px-0 pt-2">
+    <header className="w-full">
+      <div className="flex items-center justify-between w-full xl:w-11/12 max-w-screen-xl mx-auto px-2 xl:px-0 py-2">
         <div className="flex items-center">
           <div className="">
             <Link href="/">
