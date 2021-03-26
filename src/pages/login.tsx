@@ -86,15 +86,15 @@ const Login = () => {
   };
   return (
     <div className="bg-blue-100 block relative text-center w-full mx-auto h-full flex-1 ">
-      <div className="absolute top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4">
+      <div className="w-full absolute top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4">
         <h1 className="text-2xl font-bold mb-8">ログイン</h1>
-        <div>
+        <div className="w-full">
           <GoogleLogin
             clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
             render={(renderProps) => {
               return (
                 <button
-                  className="bg-white flex items-center justify-center space-x-2 font-bold rounded-full w-full max-w-2xl mx-auto px-4 py-3"
+                  className="bg-white flex items-center justify-center space-x-2 font-bold rounded-full w-11/12 max-w-xl mx-auto px-4 py-3"
                   // eslint-disable-next-line react/jsx-handler-names
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
