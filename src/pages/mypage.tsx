@@ -4,7 +4,7 @@ import type { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
-import type { MouseEvent, ReactElement, VFC } from "react";
+import type { MouseEvent, VFC } from "react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { PostCard } from "src/components/Sheard/PostCard";
@@ -88,11 +88,11 @@ const MyPage: VFC<Props> = ({ user, posts, likedPosts }) => {
           </div>
           <div>
             {openTab === 1 &&
-              posts.map<ReactElement>((post) => {
+              posts.map((post) => {
                 return <PostCard key={post.id} post={post} />;
               })}
             {openTab === 2 &&
-              likedPosts?.map<ReactElement>((post) => {
+              likedPosts?.map((post) => {
                 return <PostCard key={post.id} post={post} />;
               })}
           </div>

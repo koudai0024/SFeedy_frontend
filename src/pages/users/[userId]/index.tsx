@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
-import type { ReactElement, VFC } from "react";
+import type { VFC } from "react";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { PostCard } from "src/components/Sheard/PostCard";
 
@@ -32,7 +32,7 @@ const UserPage: VFC<Props> = ({ user, posts, count }) => {
           <h2 className="text-xl md:text-2xl font-bold mb-4">
             {user?.name}さんの投稿
           </h2>
-          {posts.map<ReactElement>((post) => {
+          {posts.map((post) => {
             return <PostCard key={post.id} post={post} />;
           })}
           {count > 10 && (

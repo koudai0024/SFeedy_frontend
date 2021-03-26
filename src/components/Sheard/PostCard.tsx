@@ -3,7 +3,7 @@ import cc from "classcat";
 import { format } from "date-fns";
 import marked from "marked";
 import Link from "next/link";
-import type { ReactElement, VFC } from "react";
+import type { VFC } from "react";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userState } from "src/lib/atom";
@@ -109,7 +109,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
               ></path>
             </svg>
           </li>
-          {post.tags.map<ReactElement>((tag) => {
+          {post.tags.map((tag) => {
             return (
               <li
                 key={tag.id}
