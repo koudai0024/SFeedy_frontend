@@ -17,7 +17,12 @@ export const Header = () => {
           <div className="">
             <Link href="/">
               <a>
-                <Image src="/image/gib-black.png" width="50" height="50" />
+                <Image
+                  src="/image/gib-black.png"
+                  width="50"
+                  height="50"
+                  alt="gib"
+                />
               </a>
             </Link>
           </div>
