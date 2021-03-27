@@ -27,7 +27,7 @@ const Login = () => {
           image: res.data.user.profile.image,
           accessToken: res.data.token,
         });
-        setCookie(null, "auth", res.data.token);
+        setCookie(null, "auth", res.data.token, { maxAge: 60 * 60 * 24 * 60 });
         setCookie(
           null,
           "user",
@@ -37,7 +37,8 @@ const Login = () => {
             email: res.data.user.email,
             image: res.data.user.profile.image,
             accessToken: res.data.token,
-          })}`
+          })}`,
+          { maxAge: 60 * 60 * 24 * 60 }
         );
         router.push("/");
       });
