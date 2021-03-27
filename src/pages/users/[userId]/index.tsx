@@ -35,6 +35,15 @@ const UserPage: VFC<Props> = ({ user, posts, count, tags }) => {
           {posts?.map((post) => {
             return <PostCard key={post.id} post={post} />;
           })}
+          {count > 10 && (
+            <div className="w-full text-center">
+              <Link href="/">
+                <a className="inline-block bg-blue-400 font-bold text-white text-center rounded-full px-4 py-2">
+                  {user?.name}さんの投稿一覧
+                </a>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="w-full lg:w-72 mt-8 lg:mt-0 ml-0 lg:ml-4">
           <div className="bg-gray-200 w-full rounded-2xl shadow p-4 mb-4">
@@ -58,53 +67,10 @@ const UserPage: VFC<Props> = ({ user, posts, count, tags }) => {
                 );
               })}
             </ul>
-            {count > 10 && (
-              <div className="w-full text-center">
-                <Link href="/">
-                  <a className="inline-block bg-blue-400 font-bold text-white text-center rounded-full px-4 py-2">
-                    {user?.name}さんの投稿一覧
-                  </a>
-                </Link>
-              </div>
-            )}
           </div>
         </div>
       </div>
     </CommonContainer>
-    // <CommonContainer>
-    //   <div className="flex flex-col lg:flex-row">
-    //     <div className="w-full lg:w-72 mt-8 lg:mt-0 mr-0 lg:mr-4">
-    //       <div className="bg-gray-200 rounded flex flex-col items-center p-8 mb-4 lg:mb-0">
-    //         <div className="w-40 h-40 rounded-full overflow-hidden mb-1">
-    //           <img
-    //             className="w-40 h-40 object-cover object-center"
-    //             src={user?.profile.image}
-    //             alt=""
-    //           />
-    //         </div>
-    //         <p className="text-2xl font-bold mb-2">{user?.name}</p>
-    //         <p className="text-base">{user?.profile?.description}</p>
-    //       </div>
-    //     </div>
-    //     <div className="flex-1">
-    //       <h2 className="text-xl md:text-2xl font-bold mb-4">
-    //         {user?.name}さんの投稿
-    //       </h2>
-    //       {posts.map((post) => {
-    //         return <PostCard key={post.id} post={post} />;
-    //       })}
-    //       {count > 10 && (
-    //         <div className="w-full text-center">
-    //           <Link href="/">
-    //             <a className="inline-block bg-blue-400 font-bold text-white text-center rounded-full px-4 py-2">
-    //               {user?.name}さんの投稿一覧
-    //             </a>
-    //           </Link>
-    //         </div>
-    //       )}
-    //     </div>
-    //   </div>
-    // </CommonContainer>
   );
 };
 
