@@ -2,7 +2,7 @@ import axios from "axios";
 import type { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { ReactElement, VFC } from "react";
+import type { VFC } from "react";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { Pagination } from "src/components/Sheard/Pagination";
 import { PostCard } from "src/components/Sheard/PostCard";
@@ -49,7 +49,7 @@ const Home: VFC<Props> = (props) => {
       </MainHeading>
       <div className="flex flex-col lg:flex-row items-start justify-between w-full">
         <div className="flex-1 w-full">
-          {posts?.map<ReactElement>((post) => {
+          {posts?.map((post) => {
             return <PostCard key={post.id} post={post} />;
           })}
           <Pagination count={count} currentPage={currentPage} path="" />

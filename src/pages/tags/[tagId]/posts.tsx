@@ -2,9 +2,10 @@ import axios from "axios";
 import type { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import type { ReactElement, VFC } from "react";
+import type { VFC } from "react";
 import { Pagination } from "src/components/Sheard/Pagination";
 import { PostCard } from "src/components/Sheard/PostCard";
+import { MainHeading } from "src/components/Sheard/Typography";
 
 type Props = {
   posts: PostType[];
@@ -17,10 +18,12 @@ const TagPosts: VFC<Props> = ({ posts, tags, tag, count }) => {
   const currentPage = parseInt(`${router.query.page}`) || 1;
   return (
     <div className="w-full xl:w-11/12 max-w-screen-xl mx-auto mt-4 md:mt-8 px-2 xl:px-0">
-      <h2 className="text-3xl font-bold mb-4 md:mb-6">{tag?.name}の投稿一覧</h2>
+      <MainHeading variant="h2" className="mb-4">
+        {tag?.name}の投稿一覧
+      </MainHeading>
       <div className="flex flex-col lg:flex-row items-start justify-between w-full">
         <div className="flex-1 w-full">
-          {posts.map<ReactElement>((post) => {
+          {posts.map((post) => {
             return <PostCard key={post.id} post={post} />;
           })}
           <Pagination
