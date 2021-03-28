@@ -14,6 +14,10 @@ class Document extends NextDocument {
     return (
       <Html lang="ja">
         <Head>
+          <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+          />
           <title>Gib - 簡単に始められる技術ブログ</title>
           <meta name="description" content="簡単に始められる技術ブログ" />
           <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_API_URL} />
