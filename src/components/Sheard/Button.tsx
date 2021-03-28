@@ -3,17 +3,17 @@ import Link from "next/link";
 import type { DOMAttributes, ReactNode, VFC } from "react";
 import type { Url } from "url";
 
-type Common = {
+export type CommonButtonType = {
   children: ReactNode;
   className?: string;
 };
 
-type Button = Common & {
+type Button = CommonButtonType & {
   button: boolean;
   onClick?: DOMAttributes<HTMLButtonElement>["onClick"];
 };
 
-type Link = Common & {
+type Link = CommonButtonType & {
   linkProps: { href: Url; as?: string };
 };
 
