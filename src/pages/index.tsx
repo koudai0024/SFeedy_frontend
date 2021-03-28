@@ -48,7 +48,7 @@ const Home: VFC<Props> = (props) => {
           {posts?.map((post) => {
             return <PostCard key={post.id} post={post} />;
           })}
-          <Pagination count={count} currentPage={currentPage} path="" />
+          <Pagination count={count} currentPage={currentPage} path="/" />
         </div>
         <div className="w-full lg:w-72 mt-8 lg:mt-0 ml-0 lg:ml-4">
           <div className="bg-gray-200 w-full rounded-2xl shadow p-4 mb-4">
