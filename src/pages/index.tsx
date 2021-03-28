@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { GetServerSideProps } from "next";
+import type { GetStaticProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import type { VFC } from "react";
@@ -11,8 +11,6 @@ import useSWR from "swr";
 
 type Props = {
   posts: PostType[];
-  tags: TagType[];
-  users: UserType[];
   count: number;
 };
 
@@ -33,12 +31,10 @@ const Home: VFC<Props> = (props) => {
   );
   const posts = postsInfo?.posts;
   const count = postsInfo?.count || 1;
-  const { data: users } = useSWR("/api/v1/users?limit=10", {
-    initialData: props.users,
+  const { data: users } = useSWR<UserType[]>("/api/v1/users?limit=10", {
     shouldRetryOnError: true,
   });
-  const { data: tags } = useSWR("/api/v1/tags?limit=10", {
-    initialData: props.tags,
+  const { data: tags } = useSWR<TagType[]>("/api/v1/tags?limit=10", {
     shouldRetryOnError: true,
   });
 
@@ -103,24 +99,28 @@ const Home: VFC<Props> = (props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const page: number = Number(ctx.query.page) || 1;
-  const limit = 10;
-  const offset = page * limit - limit;
-  const res = await axios.get(`/api/v1/posts?offset=${offset}&limit=${limit}`);
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await axios.get("/api/v1/posts?offset=0&limit=10");
   const { posts, count } = await res.data;
-
-  const tags = await (await axios.get("/api/v1/tags?limit=10")).data;
-  const users = await (await axios.get("/api/v1/users?limit=10")).data;
-
   return {
-    props: {
-      posts: posts,
-      tags: tags,
-      users: users,
-      count: count,
-    },
+    props: { posts, count },
+    revalidate: 60,
   };
 };
+
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const page: number = Number(ctx.query.page) || 1;
+//   const limit = 10;
+//   const offset = page * limit - limit;
+//   const res = await axios.get(`/api/v1/posts?offset=${offset}&limit=${limit}`);
+//   const { posts, count } = await res.data;
+
+//   return {
+//     props: {
+//       posts: posts,
+//       count: count,
+//     },
+//   };
+// };
 
 export default Home;
