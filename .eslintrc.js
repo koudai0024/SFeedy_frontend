@@ -81,5 +81,11 @@ module.exports = {
         "import/no-default-export": "off",
       },
     },
+    {
+      files: ["src/**/*.stories.tsx"],
+      rules: {
+        "react/jsx-handler-names": "off",
+      },
+    },
   ],
 };

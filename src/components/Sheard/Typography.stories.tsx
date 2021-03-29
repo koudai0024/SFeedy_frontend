@@ -6,6 +6,7 @@ import { MainHeading } from "./Typography";
 
 export default {
   title: "Example/Title",
+  component: MainHeading,
 } as Meta;
 
 storiesOf("MainHeading", module)
@@ -18,4 +19,7 @@ storiesOf("MainHeading", module)
         Hello H2
       </MainHeading>
     );
+  })
+  .add("not Children", () => {
+    return <MainHeading variant="h1"></MainHeading>;
   });

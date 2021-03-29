@@ -12,7 +12,8 @@ type Props = {
   post: PostType;
 };
 
-export const PostCard: VFC<Props> = ({ post }) => {
+export const PostCard: VFC<Props> = (props) => {
+  const post = props.post;
   const [isLikes, setIsLikes] = useState(false);
   const [likeCount, setLikeCount] = useState(post.likeCount || 0);
   const user = useRecoilValue(userState);
