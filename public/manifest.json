@@ -3,7 +3,6 @@
 	"short_name":		"Gib",
 	"description":		"Gib",
 	"start_url":		"/",
-	"scope": "/",
 	"display":			"standalone",
 	"background_color":	"#fff",
 	"theme_color":		"#fff",
