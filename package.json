@@ -39,10 +39,6 @@
     "highlight.js": "10.7.1",
     "marked": "2.0.1",
     "next": "10.0.9",
-<<<<<<< HEAD
-=======
-    "next-pwa": "5.0.6",
->>>>>>> 6a765f65d1bcddbfd1196cb9094698d07484fa05
     "nookies": "2.5.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -67,20 +63,12 @@
     "@types/nookies": "2.0.3",
     "@types/react": "17.0.3",
     "@types/recoil": "0.0.1",
-<<<<<<< HEAD
     "@typescript-eslint/eslint-plugin": "4.18.0",
     "@typescript-eslint/parser": "4.18.0",
     "autoprefixer": "^9.8.6",
     "babel-loader": "^8.2.2",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "eslint": "7.22.0",
-=======
-    "@typescript-eslint/eslint-plugin": "4.19.0",
-    "@typescript-eslint/parser": "4.19.0",
-    "autoprefixer": "10.2.5",
-    "babel-plugin-inline-react-svg": "2.0.1",
-    "eslint": "7.23.0",
->>>>>>> 6a765f65d1bcddbfd1196cb9094698d07484fa05
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsx-a11y": "6.4.1",
