@@ -131,6 +131,7 @@ const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
         />
         <script
           async={true}
+          defer={true}
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
         />
         <script

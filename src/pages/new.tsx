@@ -50,6 +50,7 @@ const PostNew = () => {
         送信
       </button>
       <Editor
+        user={user || undefined}
         title={title}
         setTitle={setTitle}
         body={body}

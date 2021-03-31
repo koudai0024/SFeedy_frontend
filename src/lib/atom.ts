@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-type User = {
+export type AtomUserType = {
   id: string;
   name: string;
   email: string;
@@ -8,7 +8,7 @@ type User = {
   accessToken: string;
 };
 
-export const userState = atom<User | null>({
+export const userState = atom<AtomUserType | null>({
   key: "userInfoState",
   default: null,
 });

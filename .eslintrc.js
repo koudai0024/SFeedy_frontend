@@ -76,9 +76,15 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["src/pages/**/*.tsx"],
+      files: ["src/pages/**/*.tsx", "src/**/*.stories.tsx"],
       rules: {
         "import/no-default-export": "off",
+      },
+    },
+    {
+      files: ["src/**/*.stories.tsx"],
+      rules: {
+        "react/jsx-handler-names": "off",
       },
     },
   ],

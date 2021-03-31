@@ -5,21 +5,24 @@ import hljs from "highlight.js";
 import marked from "marked";
 import type { ChangeEvent, Dispatch, SetStateAction, VFC } from "react";
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { userState } from "src/lib/atom";
+import type { AtomUserType } from "src/lib/atom";
+// import { useRecoilValue } from "recoil";
+// import { userState } from "src/lib/atom";
 
-type Props = {
+export type EditorProps = {
   title: string;
   setTitle: Dispatch<SetStateAction<string>>;
   body: string;
   setBody: Dispatch<SetStateAction<string>>;
   tags: string;
   setTags: Dispatch<SetStateAction<string>>;
+  user?: AtomUserType;
+  test?: boolean;
 };
 
-export const Editor: VFC<Props> = (props) => {
+export const Editor: VFC<EditorProps> = (props) => {
   const [isLoad, setIsLoad] = useState(false); //Todo Loading Icon 追加
-  const user = useRecoilValue(userState);
+  // const user = useRecoilValue(userState);
 
   const [isMode, setIsMode] = useState<"edit" | "preview">("edit");
 
@@ -38,7 +41,7 @@ export const Editor: VFC<Props> = (props) => {
     formData.append("image", files);
     axios
       .post("/api/v1/upload/article", formData, {
-        headers: { Authorization: `Bearer ${user?.accessToken}` },
+        headers: { Authorization: `Bearer ${props.user?.accessToken}` },
       })
       .then((res) => {
         const oldValue = props.body;
@@ -99,7 +102,7 @@ export const Editor: VFC<Props> = (props) => {
               htmlFor="photoBtn"
               className={cc([
                 {
-                  "pointer-events-none animate-pulse": isLoad,
+                  "pointer-events-none animate-pulse": isLoad || props.test,
                 },
               ])}
             >

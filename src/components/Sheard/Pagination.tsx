@@ -1,13 +1,17 @@
 import Link from "next/link";
 import type { VFC } from "react";
 
-type Prosp = {
+export type PaginationProsp = {
   path: string;
   count: number;
   currentPage: number;
 };
 
-export const Pagination: VFC<Prosp> = ({ path, count, currentPage }) => {
+export const Pagination: VFC<PaginationProsp> = ({
+  path,
+  count,
+  currentPage,
+}) => {
   const limit = 10;
   const page = Math.ceil(count / limit);
   if (page <= 1) {
