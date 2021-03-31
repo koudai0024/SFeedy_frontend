@@ -6,6 +6,7 @@ import type { DOMAttributes, ReactNode, VFC } from "react";
 export type CommonButtonType = {
   children: ReactNode;
   bgColor?: "red" | "blue" | "green" | "gray";
+  size: "small" | "medium" | "large";
   className?: string;
 };
 
@@ -24,12 +25,19 @@ const isButton = (props: ButtonType | LinkType): props is ButtonType => {
 
 export const CommonButton: VFC<ButtonType | LinkType> = (props) => {
   const classes = cc([
+    "rounded-full",
     props.className,
     {
+      // bgColor
       "bg-red-500 text-white": props.bgColor === "red",
       "bg-blue-500 text-white": props.bgColor === "blue",
       "bg-green-500 text-white": props.bgColor === "green",
       "bg-gray-500 text-white": props.bgColor === "gray",
+
+      // size
+      "px-3 py-1": props.size === "small",
+      "px-4 py-2": props.size === "medium",
+      "px-8 py-2": props.size === "large",
     },
   ]);
   return isButton(props) ? (

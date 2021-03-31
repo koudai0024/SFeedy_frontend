@@ -1,7 +1,7 @@
-// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
-import { storiesOf } from "@storybook/react";
+import type { Story } from "@storybook/react";
 import type { Meta } from "@storybook/react/types-6-0";
 
+import type { MainHeadingProps } from "./Typography";
 import { MainHeading } from "./Typography";
 
 export default {
@@ -9,17 +9,12 @@ export default {
   component: MainHeading,
 } as Meta;
 
-storiesOf("MainHeading", module)
-  .add("h1", () => {
-    return <MainHeading variant="h1">Hello h1</MainHeading>;
-  })
-  .add("color change", () => {
-    return (
-      <MainHeading variant="h1" className="text-red-500">
-        Hello H2
-      </MainHeading>
-    );
-  })
-  .add("not Children", () => {
-    return <MainHeading variant="h1"></MainHeading>;
-  });
+const Template: Story<MainHeadingProps> = (args) => {
+  return <MainHeading {...args}>{args.children}</MainHeading>;
+};
+
+export const Primary = Template.bind({});
+Primary.args = {
+  children: "Hello",
+  variant: "h1",
+};
