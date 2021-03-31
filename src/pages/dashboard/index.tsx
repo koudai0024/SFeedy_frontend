@@ -20,7 +20,7 @@ const Dashboard: VFC<Props> = ({ posts }) => {
       axios
         .delete(`/api/v1/posts/${id}`, {
           headers: {
-            Authorization: `Bearer ${user.accessToken}`,
+            Authorization: `Bearer ${user?.accessToken}`,
           },
         })
         .then(() => {
@@ -33,12 +33,12 @@ const Dashboard: VFC<Props> = ({ posts }) => {
   };
   return (
     <div className="w-full xl:w-11/12 max-w-screen-xl mx-auto mt-4 md:mt-8 px-2 xl:px-0">
-      <table className="w-full shadow border border-b-0 rounded overflow-hidden border-gray-200">
-        <thead className=" w-full bg-gray-50 border-b border-gray-200">
+      <table className="w-full shadow rounded overflow-hidden ">
+        <thead className=" w-full bg-black border-b border-black">
           <tr className="p-4">
             <th
               scope="col"
-              className="text-left text-xs font-medium text-gray-500 px-4 py-2"
+              className="text-left text-xs font-bold text-white px-4 py-2"
             >
               TITLE
             </th>
@@ -59,21 +59,21 @@ const Dashboard: VFC<Props> = ({ posts }) => {
         <tbody>
           {posts.map((post) => {
             return (
-              <tr key={post.id} className=" bg-white border-b border-gray-200">
+              <tr
+                key={post.id}
+                className=" bg-gray-200 border-b-2 border-white"
+              >
                 <td className="px-4 py-2r">
                   <Link
-                    href="/[user_id]/posts/[post_id]"
+                    href="/[userId]/posts/[postId]"
                     as={`/${post.userId}/posts/${post.id}`}
                   >
                     <a className="line-clamp-1">{post.title}</a>
                   </Link>
                 </td>
                 <td className="text-right block py-2">
-                  <Link
-                    href="/dashboard/[post_id]"
-                    as={`/dashboard/${post.id}`}
-                  >
-                    <a className="inline-block whitespace-nowrap bg-indigo-400 px-4 py-1 text-xs text-white rounded">
+                  <Link href="/dashboard/[postId]" as={`/dashboard/${post.id}`}>
+                    <a className="inline-block whitespace-nowrap bg-blue-400 px-4 py-1 text-xs text-white rounded-full">
                       編集
                     </a>
                   </Link>
@@ -83,7 +83,7 @@ const Dashboard: VFC<Props> = ({ posts }) => {
                     data-post-id={post.id}
                     data-post-title={post.title}
                     onClick={handleDelete}
-                    className="bg-indigo-400 px-4 py-1 text-xs text-white rounded"
+                    className="bg-red-400 px-4 py-1 text-xs text-white rounded-full"
                   >
                     削除
                   </button>

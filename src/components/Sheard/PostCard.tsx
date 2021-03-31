@@ -12,12 +12,13 @@ type Props = {
   post: PostType;
 };
 
-export const PostCard: VFC<Props> = ({ post }) => {
+export const PostCard: VFC<Props> = (props) => {
+  const post = props.post;
   const [isLikes, setIsLikes] = useState(false);
   const [likeCount, setLikeCount] = useState(post.likeCount || 0);
   const user = useRecoilValue(userState);
   useEffect(() => {
-    if (user.accessToken) {
+    if (user) {
       axios
         .get(`/api/v1/likes/${post.id}/is_likes`, {
           headers: {
@@ -31,7 +32,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
   }, []);
 
   const handleLike = async () => {
-    if (user.accessToken) {
+    if (user) {
       const res = await axios.get(`/api/v1/likes/set/${post.id}`, {
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
@@ -56,15 +57,18 @@ export const PostCard: VFC<Props> = ({ post }) => {
   };
 
   return (
-    <div className="bg-white w-full rounded-lg shadow mb-2 md:mb-4 p-2 md:p-4">
+    <div className="bg-gray-200 w-full rounded-xl shadow mb-2 md:mb-4 p-2 md:p-4">
       <div>
-        <Link href="/users/[user_id]" as={`/users/${post.userId}`}>
-          <a className="flex items-center mb-1 md:mb-2">
+        <Link href="/users/[userId]" as={`/users/${post.userId}`}>
+          <a className="flex items-center mb-1 md:mb-2 py-1">
             <div className="overflow-hidden rounded-full w-4 md:w-6 h-4 md:h-6 mr-2 md:mr-3 ">
               <img
                 src={post.user.profile.image}
-                alt=""
+                alt="ユーザー画像"
                 className="w-4 md:w-6 h-4 md:h-6 object-cover object-center"
+                width="24"
+                height="24"
+                loading="lazy"
               />
             </div>
             <p className="text-xs md:text-sm font-bold">{post.user.name}</p>
@@ -75,22 +79,24 @@ export const PostCard: VFC<Props> = ({ post }) => {
           </a>
         </Link>
       </div>
-      <h2 className="md:text-2xl font-bold line-clamp-1 mb-1 md:mb-2">
-        <Link
-          href="/users/[userId]/posts/[postId]"
-          as={`/users/${post.userId}/posts/${post.id}`}
-        >
-          {post.title}
-        </Link>
-      </h2>
-      <p className="text-sm md:text-base line-clamp-2">
-        {marked(post.body)
-          .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
-          .substr(0, 150)}
-      </p>
-      <div className="flex items-center justify-between border-t mt-2 pt-1">
-        <ul className="flex items-center mb-1">
-          <li className="text-xs md:text-sm font-light line-clamp-1 mr-1">
+      <Link
+        href="/users/[userId]/posts/[postId]"
+        as={`/users/${post.userId}/posts/${post.id}`}
+      >
+        <a>
+          <h2 className="md:text-2xl font-bold line-clamp-1 mb-1 md:mb-2">
+            {post.title}
+          </h2>
+          <p className="text-sm md:text-base line-clamp-2">
+            {marked(post.body)
+              .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
+              .substr(0, 150)}
+          </p>
+        </a>
+      </Link>
+      <div className="flex items-center justify-between border-t border-black mt-2 pt-1">
+        <ul className="flex items-center mb-1 py-1 space-x-2">
+          <li className="text-xs md:text-sm font-light line-clamp-1 ">
             <svg
               className="w-4 h-4"
               fill="currentColor"
@@ -108,7 +114,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
             return (
               <li
                 key={tag.id}
-                className="text-xs md:text-sm font-light line-clamp-1 mr-1"
+                className="text-xs md:text-sm font-light line-clamp-1 "
               >
                 <Link href="/tags/[tagId]/posts" as={`/tags/${tag.id}/posts`}>
                   <a>{tag.name}</a>
@@ -126,6 +132,7 @@ export const PostCard: VFC<Props> = ({ post }) => {
               },
             ])}
             onClick={handleLike}
+            aria-label="Like Button"
           >
             <svg
               className="w-5 h-5"

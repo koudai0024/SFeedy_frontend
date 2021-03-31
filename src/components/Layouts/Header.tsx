@@ -1,4 +1,5 @@
 import { Transition } from "@headlessui/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
@@ -10,14 +11,21 @@ export const Header = () => {
   const user = useRecoilValue(userState);
 
   return (
-    <header className="bg-white w-full shadow">
-      <div className="flex items-center justify-between w-full xl:w-11/12 max-w-screen-xl mx-auto px-2 xl:px-0 py-2 md:py-4">
+    <header className="w-full">
+      <div className="flex items-center justify-between w-full xl:w-11/12 max-w-screen-xl mx-auto px-2 xl:px-0 py-2">
         <div className="flex items-center">
-          <p className="text-2xl md:text-3xl font-bold">
+          <div className="">
             <Link href="/">
-              <a>SFeedy</a>
+              <a>
+                <Image
+                  src="/image/gib-black.png"
+                  width="50"
+                  height="50"
+                  alt="gib"
+                />
+              </a>
             </Link>
-          </p>
+          </div>
           {/* <Link href="/search">
             <a className="text-indigo-500 border-2 border-indigo-500 rounded ml-4">
               <svg
@@ -36,10 +44,10 @@ export const Header = () => {
           </Link> */}
         </div>
         <div className="flex items-center">
-          {user.id && <HeaderLogined />}
-          {!user.id && (
+          {user && <HeaderLogined />}
+          {!user && (
             <Link href="/login">
-              <a className="bg-indigo-400 block border-2 border-indigo-400 rounded text-sm md:text-base text-white ml-4 px-4 py-2">
+              <a className="bg-blue-500 block border-2 border-blue-500 rounded-full text-sm md:text-base text-white ml-4 px-4 py-2">
                 ログイン
               </a>
             </Link>
@@ -86,11 +94,12 @@ const HeaderLogined = () => {
             <span className="sr-only">Open user menu</span>
             <img
               className="object-cover object-center md:w-12 w-8 md:h-12 h-8"
-              src={user.image || ""}
-              width="800"
-              height="800"
+              src={user?.image}
+              width="48"
+              height="48"
               id="image-btn"
-              alt=""
+              alt="ユーザープロフィール画像"
+              loading="lazy"
             />
           </button>
         </div>
@@ -146,7 +155,7 @@ const HeaderLogined = () => {
         </Transition>
       </div>
       <Link href="/new">
-        <a className="block text-white font-bold border border-indigo-500 bg-indigo-500 hover:bg-indigo-300 md:py-2 py-1 md:px-4 px-2 rounded md:ml-4 ml-2">
+        <a className="block text-white font-bold border border-blue-500 bg-blue-500 hover:bg-blue-300 md:py-2 py-1 md:px-4 px-2 rounded-full md:ml-4 ml-2">
           Add New
         </a>
       </Link>

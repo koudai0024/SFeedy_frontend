@@ -17,7 +17,7 @@ const Profile = () => {
   const [isLoad, setIsLoad] = useState(false);
 
   useEffect(() => {
-    if (user.accessToken) {
+    if (user) {
       setImage(`${user.image}`);
       setName(`${user.name}`);
       axios
@@ -35,7 +35,7 @@ const Profile = () => {
     }
   }, []);
 
-  if (!user.id) {
+  if (!user) {
     router.push("/");
   }
 
@@ -50,7 +50,7 @@ const Profile = () => {
     axios
       .post("/api/v1/profile", data, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${user?.accessToken}`,
         },
       })
       .then(() => {
@@ -85,7 +85,7 @@ const Profile = () => {
     axios
       .post("/api/v1/upload/profile", formData, {
         headers: {
-          Authorization: `Bearer ${user.accessToken}`,
+          Authorization: `Bearer ${user?.accessToken}`,
         },
       })
       .then((res) => {
@@ -140,20 +140,20 @@ const Profile = () => {
         <input
           type="text"
           placeholder="name"
-          className="text-xl w-full border-2 rounded px-2 py-1 mb-4"
+          className="bg-gray-200 text-xl w-full border-2 rounded-full px-4 py-2 mb-4"
           value={name}
           onChange={handleName}
         />
         <textarea
           placeholder="自己紹介、スキル、etc..."
-          className="text-xl w-full h-60 max-h-80 border-2 rounded px-2 py-2 mb-3"
+          className="bg-gray-200 text-xl w-full h-60 max-h-80 border-2 rounded-2xl px-4 py-2 mb-3"
           value={description}
           onChange={handleDesc}
         />
         <button
           onClick={handleSend}
           className={cc([
-            "bg-indigo-400 text-white font-bold px-8 py-2 rounded",
+            "bg-blue-400 text-white font-bold px-8 py-2 rounded-full",
             {
               "bg-gray-400 pointer-events-none": isLoad,
             },

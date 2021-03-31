@@ -1,4 +1,5 @@
 import axios from "axios";
+import cc from "classcat";
 import type { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -33,7 +34,7 @@ const MyPage: VFC<Props> = ({ user, posts, likedPosts }) => {
   const router = useRouter();
   const [openTab, setOpenTab] = useState(1);
 
-  if (!accessUser.id && typeof window !== "undefined") {
+  if (!accessUser && typeof window !== "undefined") {
     router.push("/");
   }
 
@@ -44,9 +45,9 @@ const MyPage: VFC<Props> = ({ user, posts, likedPosts }) => {
 
   if (user) {
     return (
-      <div className="flex flex-col lg:flex-row w-full xl:w-11/12 max-w-screen-xl mx-auto mt-4 md:mt-8 px-2 xl:px-0">
-        <div className="w-full lg:w-72 mt-8 lg:mt-0 mr-0 lg:mr-4">
-          <span className="bg-white rounded flex flex-col items-center p-8 mb-4 lg:mb-0">
+      <div className="flex flex-col lg:flex-row w-full xl:w-11/12 max-w-screen-xl mx-auto px-2 xl:px-0">
+        <div className="w-full lg:w-72 mr-0 lg:mr-4">
+          <span className="bg-gray-200 rounded-2xl flex flex-col items-center p-8 mb-4 lg:mb-0">
             <div className="w-40 h-40 rounded-full overflow-hidden mb-1">
               <img
                 className="w-40 h-40 object-cover object-center"
@@ -57,19 +58,26 @@ const MyPage: VFC<Props> = ({ user, posts, likedPosts }) => {
             <p className="text-2xl font-bold mb-2">{user?.name}</p>
             <p className="text-base mb-2">{user.profile?.description}</p>
             <Link href="/profile">
-              <a className=" bg-indigo-400 text-sm text-white py-2 px-3 rounded">
+              <a className=" bg-blue-400 text-sm text-white py-2 px-3 rounded-full">
                 プロフィール編集
               </a>
             </Link>
           </span>
         </div>
         <div className="flex-1">
-          <div className="flex items-center  mb-2">
+          <div className="flex items-center space-x-2 mb-2">
             {TABS.map((tab) => {
               return (
                 <button
                   key={tab.id}
-                  className="bg-white px-3 py-2 rounded mr-1"
+                  // className="bg-blue-500 text-white px-3 py-2 rounded mr-1"
+                  className={cc([
+                    "px-3 py-2 rounded",
+                    {
+                      "bg-gray-400 text-white": openTab === tab.id,
+                      "bg-blue-400 text-white": openTab !== tab.id,
+                    },
+                  ])}
                   onClick={handleTab}
                   data-tab={tab.id}
                 >
