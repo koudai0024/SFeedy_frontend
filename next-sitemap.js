@@ -10,6 +10,13 @@ module.exports = {
     "/profile",
   ], // <= exclude here
   robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/new", "/login", "/dashboard", "/mypage", "/profile"],
+      },
+    ],
     additionalSitemaps: [`${process.env.SITE_URL}/server-sitemap.xml`],
   },
 };
