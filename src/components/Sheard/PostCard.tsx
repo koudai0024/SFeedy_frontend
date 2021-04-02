@@ -63,7 +63,7 @@ export const PostCardFn: VFC<Props> = (props) => {
           <a className="flex items-center mb-1 md:mb-2 py-1">
             <div className="overflow-hidden rounded-full w-4 md:w-6 h-4 md:h-6 mr-2 md:mr-3 ">
               <img
-                src={post.user.profile.image}
+                src={post.user?.profile.image}
                 alt="ユーザー画像"
                 className="w-4 md:w-6 h-4 md:h-6 object-cover object-center"
                 width="24"
@@ -71,7 +71,7 @@ export const PostCardFn: VFC<Props> = (props) => {
                 loading="lazy"
               />
             </div>
-            <p className="text-xs md:text-sm font-bold">{post.user.name}</p>
+            <p className="text-xs md:text-sm font-bold">{post.user?.name}</p>
             <span className="text-base md:text-lg">・</span>
             <p className="text-xs md:text-sm text-gray-500">
               {format(new Date(post.createdAt), "yyyy年M月d日")}
