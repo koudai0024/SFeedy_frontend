@@ -16,8 +16,6 @@ const Dashboard: VFC<Props> = ({ posts }) => {
   const handleDelete = (e: React.MouseEvent<HTMLElement>) => {
     const id = e.currentTarget.getAttribute("data-post-id");
     const title = e.currentTarget.getAttribute("data-post-title");
-    // eslint-disable-next-line no-console
-    console.log(id, title);
     if (confirm(`${title}を削除いたします`)) {
       axios
         .delete(`/api/v1/posts/${id}`, {
