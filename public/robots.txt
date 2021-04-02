@@ -1,7 +1,6 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /server-sitemap.xml
 Disallow: /new
 Disallow: /login
 Disallow: /dashboard

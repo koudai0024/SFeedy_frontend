@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import marked from "marked";
 import Link from "next/link";
 import type { VFC } from "react";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userState } from "src/lib/atom";
 
@@ -12,7 +12,7 @@ type Props = {
   post: PostType;
 };
 
-export const PostCard: VFC<Props> = (props) => {
+export const PostCardFn: VFC<Props> = (props) => {
   const post = props.post;
   const [isLikes, setIsLikes] = useState(false);
   const [likeCount, setLikeCount] = useState(post.likeCount || 0);
@@ -153,3 +153,5 @@ export const PostCard: VFC<Props> = (props) => {
     </div>
   );
 };
+
+export const PostCard = memo(PostCardFn);

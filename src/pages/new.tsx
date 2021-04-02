@@ -2,6 +2,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
+import { CommonButton } from "src/components/Sheard/Button";
+import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { userState } from "src/lib/atom";
 
 import { Editor } from "../components/Sheard/Editor";
@@ -43,12 +45,23 @@ const PostNew = () => {
   };
   return (
     <div className="mt-4">
-      <button
+      <CommonContainer>
+        <CommonButton
+          button
+          onClick={handleSend}
+          bgColor="cyan"
+          size="small"
+          className="block ml-auto mb-4"
+        >
+          送信
+        </CommonButton>
+      </CommonContainer>
+      {/* <button
         onClick={handleSend}
         className="bg-blue-400 block rounded-full text-sm md:text-base text-white ml-auto mr-8 mb-2 px-4 py-2"
       >
         送信
-      </button>
+      </button> */}
       <Editor
         user={user || undefined}
         title={title}
