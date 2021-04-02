@@ -1,6 +1,7 @@
 import "../styles/tailwind.css";
 import "github-markdown-css";
 import "highlight.js/styles/github-gist.css";
+import "nprogress/nprogress.css";
 
 import axios from "axios";
 import type { NextPageContext } from "next";
@@ -8,6 +9,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
+import nprogress from "nprogress";
 import type { ReactChild, VFC } from "react";
 import { useEffect } from "react";
 import { RecoilRoot } from "recoil";
@@ -38,7 +40,16 @@ const SafeHydrate: VFC<{ children: ReactChild }> = ({ children }) => {
   );
 };
 
+nprogress.configure({ showSpinner: false, speed: 400, minimum: 0.25 });
+
 const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
+  if (process.browser) {
+    // バーの表示開始
+    nprogress.start();
+  }
+  useEffect(() => {
+    nprogress.done();
+  });
   const initializeState = ({ set }: any) => {
     const cookie = parseCookies(ctx);
     if (cookie?.user) {
