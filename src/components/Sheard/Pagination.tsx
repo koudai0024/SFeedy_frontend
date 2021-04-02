@@ -10,8 +10,6 @@ export type PaginationProsp = {
 export const Pagination: VFC<PaginationProsp> = (props) => {
   const limit = 10;
   const page = Math.ceil(props.count / limit);
-  // eslint-disable-next-line no-console
-  console.log(props.path);
   if (page <= 1) {
     return null;
   }
