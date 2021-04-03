@@ -182,7 +182,10 @@ const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
           }}
         >
           <SafeHydrate>
-            <InstantSearch indexName="posts" searchClient={algoliaClient}>
+            <InstantSearch
+              indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX}
+              searchClient={algoliaClient}
+            >
               <Layout>
                 <Component {...pageProps} />
               </Layout>
