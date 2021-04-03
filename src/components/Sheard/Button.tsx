@@ -5,7 +5,7 @@ import type { DOMAttributes, ReactNode, VFC } from "react";
 
 export type CommonButtonType = {
   children: ReactNode;
-  bgColor?: "red" | "blue" | "green" | "gray";
+  bgColor?: "red" | "blue" | "cyan" | "green" | "gray";
   size: "small" | "medium" | "large";
   className?: string;
 };
@@ -29,10 +29,11 @@ export const CommonButton: VFC<ButtonType | LinkType> = (props) => {
     props.className,
     {
       // bgColor
-      "bg-red-500 text-white": props.bgColor === "red",
-      "bg-blue-500 text-white": props.bgColor === "blue",
-      "bg-green-500 text-white": props.bgColor === "green",
-      "bg-gray-500 text-white": props.bgColor === "gray",
+      "bg-red-600 text-white": props.bgColor === "red",
+      "bg-blue-600 text-white": props.bgColor === "blue",
+      "bg-cyan-500 text-white": props.bgColor === "cyan",
+      "bg-green-600 text-white": props.bgColor === "green",
+      "bg-gray-600 text-white": props.bgColor === "gray",
 
       // size
       "px-3 py-1": props.size === "small",
@@ -49,4 +50,25 @@ export const CommonButton: VFC<ButtonType | LinkType> = (props) => {
       <a className={classes}>{props.children}</a>
     </Link>
   );
+};
+
+export const CommonButtonUi: VFC<CommonButtonType> = (props) => {
+  const classes = cc([
+    "rounded-full",
+    props.className,
+    {
+      // bgColor
+      "bg-red-600 text-white": props.bgColor === "red",
+      "bg-blue-600 text-white": props.bgColor === "blue",
+      "bg-cyan-500 text-white": props.bgColor === "cyan",
+      "bg-green-600 text-white": props.bgColor === "green",
+      "bg-gray-600 text-white": props.bgColor === "gray",
+
+      // size
+      "px-3 py-1": props.size === "small",
+      "px-4 py-2": props.size === "medium",
+      "px-8 py-2": props.size === "large",
+    },
+  ]);
+  return <div className={classes}>{props.children}</div>;
 };

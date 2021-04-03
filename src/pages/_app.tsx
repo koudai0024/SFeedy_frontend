@@ -3,6 +3,7 @@ import "github-markdown-css";
 import "highlight.js/styles/github-gist.css";
 import "nprogress/nprogress.css";
 
+import algoliasearch from "algoliasearch";
 import axios from "axios";
 import type { NextPageContext } from "next";
 import type { AppProps } from "next/app";
@@ -12,11 +13,17 @@ import { parseCookies } from "nookies";
 import nprogress from "nprogress";
 import type { ReactChild, VFC } from "react";
 import { useEffect } from "react";
+import { InstantSearch } from "react-instantsearch-dom";
 import { RecoilRoot } from "recoil";
 import { Layout } from "src/components/Layouts/Layout";
 import * as gtag from "src/lib/analytics/google";
 import { GA_TRACKING_ID } from "src/lib/analytics/google";
 import { SWRConfig } from "swr";
+
+const algoliaClient = algoliasearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_ID,
+  process.env.NEXT_PUBLIC_ALGOLIA_KEY
+);
 
 //axios default state
 axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_API_URL}`;
@@ -159,6 +166,7 @@ const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
           }}
         />
       </Head>
+
       <RecoilRoot initializeState={initializeState}>
         <SWRConfig
           value={{
@@ -174,9 +182,11 @@ const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
           }}
         >
           <SafeHydrate>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <InstantSearch indexName="posts" searchClient={algoliaClient}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </InstantSearch>
           </SafeHydrate>
         </SWRConfig>
       </RecoilRoot>

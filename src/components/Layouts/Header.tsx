@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { userState } from "src/lib/atom";
 
+import { CommonButton } from "../Sheard/Button";
+
 export const Header = () => {
   const user = useRecoilValue(userState);
 
@@ -26,7 +28,7 @@ export const Header = () => {
               </a>
             </Link>
           </div>
-          {/* <Link href="/search">
+          <Link href="/search">
             <a className="text-indigo-500 border-2 border-indigo-500 rounded ml-4">
               <svg
                 className="w-6 h-6"
@@ -41,7 +43,7 @@ export const Header = () => {
                 />
               </svg>
             </a>
-          </Link> */}
+          </Link>
         </div>
         <div className="flex items-center">
           {user && <HeaderLogined />}
@@ -154,11 +156,14 @@ const HeaderLogined = () => {
           </div>
         </Transition>
       </div>
-      <Link href="/new">
-        <a className="block text-white font-bold border border-blue-500 bg-blue-500 hover:bg-blue-300 md:py-2 py-1 md:px-4 px-2 rounded-full md:ml-4 ml-2">
-          Add New
-        </a>
-      </Link>
+      <CommonButton
+        linkProps={{ href: "/new" }}
+        bgColor="blue"
+        size="medium"
+        className="ml-2"
+      >
+        Add New
+      </CommonButton>
     </div>
   );
 };
