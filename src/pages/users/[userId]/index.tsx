@@ -2,6 +2,7 @@ import axios from "axios";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
 import type { VFC } from "react";
+import { CommonButton } from "src/components/Sheard/Button";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { PostCard } from "src/components/Sheard/PostCard";
 import { MainHeading } from "src/components/Sheard/Typography";
@@ -37,14 +38,17 @@ const UserPage: VFC<Props> = ({ user, posts, count, tags }) => {
           })}
           {count > 10 && (
             <div className="w-full text-center">
-              <Link
-                href={`/users/[userId]/posts`}
-                as={`/users/${user.id}/posts`}
+              <CommonButton
+                bgColor="blue"
+                size="medium"
+                linkProps={{
+                  href: `/users/[userId]/posts`,
+                  as: `/users/${user.id}/posts`,
+                }}
+                className="mt-8"
               >
-                <a className="inline-block bg-blue-400 font-bold text-white text-center rounded-full px-4 py-2">
-                  {user?.name}さんの投稿一覧
-                </a>
-              </Link>
+                {user?.name}さんの投稿一覧
+              </CommonButton>
             </div>
           )}
         </div>

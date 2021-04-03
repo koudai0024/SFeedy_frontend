@@ -1,5 +1,6 @@
-import Link from "next/link";
 import type { VFC } from "react";
+
+import { CommonButton } from "./Button";
 
 export type PaginationProsp = {
   path: string;
@@ -15,34 +16,50 @@ export const Pagination: VFC<PaginationProsp> = (props) => {
   }
   if (props.currentPage === 1) {
     return (
-      <Link href={`${props.path}/?page=${props.currentPage + 1}`}>
-        <a className="bg-blue-400 flex items-center justify-center mx-auto text-sm text-white rounded-full w-32 h-9">
+      <div className="flex items-center justify-center mt-4">
+        <CommonButton
+          linkProps={{ href: `${props.path}/?page=${props.currentPage + 1}` }}
+          size="medium"
+          bgColor="blue"
+          className="mx-auto"
+        >
           次のページ＞
-        </a>
-      </Link>
+        </CommonButton>
+      </div>
     );
   }
   if (props.currentPage === page) {
     return (
-      <Link href={`${props.path}/?page=${props.currentPage - 1}`}>
-        <a className="bg-blue-400 flex items-center justify-center mx-auto text-sm text-white rounded-full w-32 h-9">
+      <div className="flex items-center justify-center mt-4">
+        <CommonButton
+          linkProps={{ href: `${props.path}/?page=${props.currentPage - 1}` }}
+          size="medium"
+          bgColor="blue"
+          className="mx-auto"
+        >
           ＜前のページ
-        </a>
-      </Link>
+        </CommonButton>
+      </div>
     );
   }
   return (
     <div className="flex justify-center w-full mx-auto space-x-2">
-      <Link href={`${props.path}/?page=${props.currentPage - 1}`}>
-        <a className="bg-blue-400 flex items-center justify-center text-sm text-white rounded-full w-32 h-9 ">
-          ＜前のページ
-        </a>
-      </Link>
-      <Link href={`${props.path}/?page=${props.currentPage + 1}`}>
-        <a className="bg-blue-400 flex items-center justify-center text-sm text-white rounded-full w-32 h-9 ">
-          次のページ＞
-        </a>
-      </Link>
+      <CommonButton
+        linkProps={{ href: `${props.path}/?page=${props.currentPage + 1}` }}
+        size="medium"
+        bgColor="blue"
+        className="mx-auto"
+      >
+        次のページ＞
+      </CommonButton>
+      <CommonButton
+        linkProps={{ href: `${props.path}/?page=${props.currentPage - 1}` }}
+        size="medium"
+        bgColor="blue"
+        className="mx-auto"
+      >
+        ＜前のページ
+      </CommonButton>
     </div>
   );
 };
