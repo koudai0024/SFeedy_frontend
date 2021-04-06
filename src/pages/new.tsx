@@ -1,23 +1,39 @@
 import axios from "axios";
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { CommonButton } from "src/components/Sheard/Button";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
+import { Editor } from "src/components/Sheard/Editor";
 import { userState } from "src/lib/atom";
 
-import { Editor } from "../components/Sheard/Editor";
-
-const PostNew = () => {
+const PostNew: NextPage = () => {
   const router = useRouter();
+
+  /**
+   * ユーザー情報の取得
+   */
+
   const user = useRecoilValue(userState);
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [tags, setTags] = useState("");
+
+  /**
+   * ログインしていなければリダイレクト
+   */
   if (!user) {
     router.push("/");
   }
 
+  /**
+   * 各種ステート
+   */
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [tags, setTags] = useState("");
+
+  /**
+   * APIに送信するデータの整形
+   */
   const data = {
     title: title,
     body: body,
@@ -27,6 +43,9 @@ const PostNew = () => {
         : null,
   };
 
+  /**
+   * 送信ボタンクリック時の処理
+   */
   const handleSend = () => {
     axios
       .post("/api/v1/posts", data, {
@@ -40,9 +59,8 @@ const PostNew = () => {
       .catch((err) => {
         alert(err);
       });
-
-    return;
   };
+
   return (
     <div className="mt-4">
       <CommonContainer>
@@ -56,12 +74,6 @@ const PostNew = () => {
           送信
         </CommonButton>
       </CommonContainer>
-      {/* <button
-        onClick={handleSend}
-        className="bg-blue-400 block rounded-full text-sm md:text-base text-white ml-auto mr-8 mb-2 px-4 py-2"
-      >
-        送信
-      </button> */}
       <Editor
         user={user || undefined}
         title={title}

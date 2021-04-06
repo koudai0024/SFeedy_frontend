@@ -1,18 +1,21 @@
 import axios from "axios";
-import type { GetServerSideProps } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
-import type { VFC } from "react";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { Pagination } from "src/components/Sheard/Pagination";
 import { PostCard } from "src/components/Sheard/PostCard";
 
-type Props = {
+// ===================================
+// propsの型を設定
+// ===================================
+type UserPostsProps = {
   user: UserType;
   posts: PostType[];
   count: number;
 };
 
-const UserPosts: VFC<Props> = ({ user, posts, count }) => {
+const UserPosts: NextPage<UserPostsProps> = (props) => {
+  const { user, posts, count } = props;
   const router = useRouter();
   const currentPage = parseInt(`${router.query.page}`) || 1;
   return (

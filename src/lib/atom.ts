@@ -12,8 +12,3 @@ export const userState = atom<AtomUserType | null>({
   key: "userInfoState",
   default: null,
 });
-// id: "",
-//     name: "",
-//     email: "",
-//     image: "",
-//     accessToken: "",

@@ -2,21 +2,37 @@ import axios from "axios";
 import cc from "classcat";
 import { format } from "date-fns";
 import marked from "marked";
+import Image from "next/image";
 import Link from "next/link";
 import type { VFC } from "react";
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userState } from "src/lib/atom";
 
-type Props = {
+/**
+ * propsの型定義
+ */
+type PostCardProps = {
   post: PostType;
 };
 
-export const PostCardFn: VFC<Props> = (props) => {
+export const PostCard: VFC<PostCardProps> = (props) => {
   const post = props.post;
+
+  /**
+   * ユーザー情報の取得
+   */
+  const user = useRecoilValue(userState);
+
+  /**
+   * いいねの状態と数のステート
+   */
   const [isLikes, setIsLikes] = useState(false);
   const [likeCount, setLikeCount] = useState(post.likeCount || 0);
-  const user = useRecoilValue(userState);
+
+  /**
+   * ロード時にログインしていれば受け取ったpropsの記事がいいねされているか判定
+   */
   useEffect(() => {
     if (user) {
       axios
@@ -31,6 +47,9 @@ export const PostCardFn: VFC<Props> = (props) => {
     }
   }, []);
 
+  /**
+   * いいねボタンを押した時の処理
+   */
   const handleLike = async () => {
     if (user) {
       const res = await axios.get(`/api/v1/likes/set/${post.id}`, {
@@ -61,11 +80,11 @@ export const PostCardFn: VFC<Props> = (props) => {
       <div>
         <Link href="/users/[userId]" as={`/users/${post.userId}`}>
           <a className="flex items-center mb-1 md:mb-2 py-1">
-            <div className="overflow-hidden rounded-full w-4 md:w-6 h-4 md:h-6 mr-2 md:mr-3 ">
-              <img
+            <div className="flex items-center justify-center overflow-hidden rounded-full w-5 md:w-6 h-5 md:h-6 mr-2 md:mr-3 ">
+              <Image
                 src={post.user?.profile.image}
                 alt="ユーザー画像"
-                className="w-4 md:w-6 h-4 md:h-6 object-cover object-center"
+                className="w-5 md:w-6 h-5 md:h-6 object-cover object-center"
                 width="24"
                 height="24"
                 loading="lazy"
@@ -73,7 +92,7 @@ export const PostCardFn: VFC<Props> = (props) => {
             </div>
             <p className="text-xs md:text-sm font-bold">{post.user?.name}</p>
             <span className="text-base md:text-lg">・</span>
-            <p className="text-xs md:text-sm text-gray-500">
+            <p className="text-xs md:text-sm text-gray-600">
               {format(new Date(post.createdAt), "yyyy年M月d日")}
             </p>
           </a>
@@ -153,5 +172,3 @@ export const PostCardFn: VFC<Props> = (props) => {
     </div>
   );
 };
-
-export const PostCard = memo(PostCardFn);

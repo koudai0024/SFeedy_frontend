@@ -1,9 +1,8 @@
-import "../styles/tailwind.css";
+import "src/styles/tailwind.css";
 import "github-markdown-css";
 import "highlight.js/styles/github-gist.css";
 import "nprogress/nprogress.css";
 
-import algoliasearch from "algoliasearch";
 import axios from "axios";
 import type { NextPageContext } from "next";
 import type { AppProps } from "next/app";
@@ -16,16 +15,19 @@ import { useEffect } from "react";
 import { InstantSearch } from "react-instantsearch-dom";
 import { RecoilRoot } from "recoil";
 import { Layout } from "src/components/Layouts/Layout";
-import * as gtag from "src/lib/analytics/google";
+import { algoliaClient } from "src/lib/algolia";
 import { GA_TRACKING_ID } from "src/lib/analytics/google";
+import * as gtag from "src/lib/analytics/google";
 import { SWRConfig } from "swr";
 
-const algoliaClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_KEY
-);
+// ===================================
+// ブラウザのローディングバー表示設定
+// ===================================
+nprogress.configure({ showSpinner: false, speed: 400, minimum: 0.25 });
 
-//axios default state
+// ===================================
+// axiosのデフォルト値設定
+// ===================================
 axios.defaults.baseURL = `${process.env.NEXT_PUBLIC_API_URL}`;
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 axios.defaults.headers.common["Accept"] = "application/json";
@@ -39,6 +41,9 @@ if (
   }`;
 }
 
+// ===================================
+// windowの状態によるエラーを回避
+// ===================================
 const SafeHydrate: VFC<{ children: ReactChild }> = ({ children }) => {
   return (
     <div suppressHydrationWarning>
@@ -47,9 +52,12 @@ const SafeHydrate: VFC<{ children: ReactChild }> = ({ children }) => {
   );
 };
 
-nprogress.configure({ showSpinner: false, speed: 400, minimum: 0.25 });
-
 const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
+  const router = useRouter();
+
+  // ===================================
+  // ブラウザのローディングバー表示設定
+  // ===================================
   if (process.browser) {
     // バーの表示開始
     nprogress.start();
@@ -57,18 +65,23 @@ const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
   useEffect(() => {
     nprogress.done();
   });
+
+  // ===================================
+  // recoilステートの永続化
+  // ===================================
   const initializeState = ({ set }: any) => {
     const cookie = parseCookies(ctx);
     if (cookie?.user) {
       const user = JSON.parse(cookie.user);
-
       if (user) {
         set({ key: "userInfoState" }, user);
       }
     }
   };
 
-  const router = useRouter();
+  // ===================================
+  // GoogleAnalitycsの設定
+  // ===================================
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       gtag.pageview(url);

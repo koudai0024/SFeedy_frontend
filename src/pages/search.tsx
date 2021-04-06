@@ -1,10 +1,10 @@
+import type { NextPage } from "next";
+import { Hits } from "src/components/Sheard/algolia/Hits";
 import { CustomPagination } from "src/components/Sheard/algolia/Pagination";
+import { SearchBox } from "src/components/Sheard/algolia/SearchBox";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 
-import { Hits } from "../components/Sheard/algolia/Hits";
-import { SearchBox } from "../components/Sheard/algolia/SearchBox";
-
-const SearchPage = () => {
+const SearchPage: NextPage = () => {
   return (
     <CommonContainer>
       <SearchBox />

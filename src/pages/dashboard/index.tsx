@@ -1,19 +1,31 @@
 import axios from "axios";
-import type { GetServerSideProps } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import { parseCookies } from "nookies";
-import type { VFC } from "react";
+import type { MouseEventHandler } from "react";
 import { useRecoilValue } from "recoil";
 import { userState } from "src/lib/atom";
 
-type Props = {
+// ===================================
+// propsの型を設定
+// ===================================
+type DashboardProps = {
   posts: PostType[];
   count: number;
 };
 
-const Dashboard: VFC<Props> = ({ posts }) => {
+const Dashboard: NextPage<DashboardProps> = (props) => {
+  const { posts } = props;
+
+  /**
+   * ユーザー情報を取得
+   */
   const user = useRecoilValue(userState);
-  const handleDelete = (e: React.MouseEvent<HTMLElement>) => {
+
+  /**
+   * 削除ボタンクリック時の処理
+   */
+  const handleDelete: MouseEventHandler<HTMLButtonElement> = (e) => {
     const id = e.currentTarget.getAttribute("data-post-id");
     const title = e.currentTarget.getAttribute("data-post-title");
     if (confirm(`${title}を削除いたします`)) {
@@ -31,6 +43,7 @@ const Dashboard: VFC<Props> = ({ posts }) => {
         });
     }
   };
+
   return (
     <div className="w-full xl:w-11/12 max-w-screen-xl mx-auto mt-4 md:mt-8 px-2 xl:px-0">
       <table className="w-full shadow rounded overflow-hidden ">

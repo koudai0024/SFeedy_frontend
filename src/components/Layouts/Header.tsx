@@ -5,9 +5,8 @@ import { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
 import { useEffect, useState } from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
+import { CommonButton } from "src/components/Sheard/Button";
 import { userState } from "src/lib/atom";
-
-import { CommonButton } from "../Sheard/Button";
 
 export const Header = () => {
   const user = useRecoilValue(userState);
@@ -29,7 +28,10 @@ export const Header = () => {
             </Link>
           </div>
           <Link href="/search">
-            <a className="text-indigo-500 border-2 border-indigo-500 rounded ml-4">
+            <a
+              className="text-indigo-500 border-2 border-indigo-500 rounded ml-4"
+              title="search"
+            >
               <svg
                 className="w-6 h-6"
                 fill="currentColor"
@@ -94,9 +96,9 @@ const HeaderLogined = () => {
             onClick={handleIsOpen}
           >
             <span className="sr-only">Open user menu</span>
-            <img
+            <Image
               className="object-cover object-center md:w-12 w-8 md:h-12 h-8"
-              src={user?.image}
+              src={`${user?.image}`}
               width="48"
               height="48"
               id="image-btn"

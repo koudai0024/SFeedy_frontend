@@ -1,4 +1,6 @@
-const Fallback = () => {
+import type { NextPage } from "next";
+
+const Fallback: NextPage = () => {
   return <div>offline</div>;
 };
 
