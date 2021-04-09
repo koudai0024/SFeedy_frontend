@@ -36,7 +36,7 @@
     "axios": "0.21.1",
     "cheerio": "1.0.0-rc.5",
     "classcat": "5.0.3",
-    "date-fns": "2.19.0",
+    "date-fns": "2.20.1",
     "github-markdown-css": "4.0.0",
     "highlight.js": "10.7.1",
     "marked": "2.0.1",
