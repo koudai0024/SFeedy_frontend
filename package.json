@@ -34,7 +34,7 @@
     "@headlessui/react": "0.3.1",
     "algoliasearch": "4.8.6",
     "axios": "0.21.1",
-    "cheerio": "1.0.0-rc.5",
+    "cheerio": "1.0.0-rc.6",
     "classcat": "5.0.3",
     "date-fns": "2.20.1",
     "github-markdown-css": "4.0.0",
