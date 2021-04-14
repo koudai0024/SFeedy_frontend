@@ -3,21 +3,30 @@ import cheerio from "cheerio";
 import { format } from "date-fns";
 import hljs from "highlight.js";
 import marked from "marked";
-import type { GetStaticPaths, GetStaticProps } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import type { VFC } from "react";
 
-type Props = {
+// ===================================
+// propsの型を設定
+// ===================================
+type PostPageProps = {
   post: PostType;
 };
 
-const PostPage: VFC<Props> = (props) => {
+const PostPage: NextPage<PostPageProps> = (props) => {
   const post = props.post;
 
+  /**
+   * markdの設定
+   */
   marked.setOptions({
     headerIds: false,
   });
+
+  /**
+   * 受け取ったbodyのHTMLタグのオプションを最適化
+   */
   const $ = cheerio.load(marked(post?.body || ""));
   $("a").each((_, elm) => {
     $(elm).attr("rel", "noopener noreferrer");
@@ -33,6 +42,7 @@ const PostPage: VFC<Props> = (props) => {
     $(elm).html(result.value);
     $(elm).addClass("hljs");
   });
+
   return (
     <>
       <Head>

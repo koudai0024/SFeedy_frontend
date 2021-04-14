@@ -1,20 +1,27 @@
 import axios from "axios";
-import type { GetStaticPaths, GetStaticProps } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
-import type { VFC } from "react";
 import { CommonButton } from "src/components/Sheard/Button";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { PostCard } from "src/components/Sheard/PostCard";
 import { MainHeading } from "src/components/Sheard/Typography";
 
-type Props = {
+/**
+ * 型定義
+ */
+type UserPageProps = {
   user: UserType;
   posts: PostType[];
   count: number;
   tags: TagType[];
 };
 
-const UserPage: VFC<Props> = ({ user, posts, count, tags }) => {
+const UserPage: NextPage<UserPageProps> = (props) => {
+  /**
+   * propsの分割代入
+   */
+  const { user, posts, count, tags } = props;
+
   return (
     <CommonContainer>
       <div className="w-full flex flex-col justify-center items-center mb-8">

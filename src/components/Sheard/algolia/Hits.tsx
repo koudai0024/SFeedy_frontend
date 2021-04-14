@@ -1,8 +1,7 @@
 import type { VFC } from "react";
 import type { Hit, HitsProvided } from "react-instantsearch-core";
 import { connectHits } from "react-instantsearch-dom";
-
-import { PostCard } from "../PostCard";
+import { PostCard } from "src/components/Sheard/PostCard";
 
 const HitsItem: VFC<HitsProvided<Hit<PostType>>> = ({ hits }) => {
   return (

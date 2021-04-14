@@ -1,4 +1,5 @@
 import axios from "axios";
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { setCookie } from "nookies";
 import type {
@@ -9,10 +10,15 @@ import GoogleLogin from "react-google-login";
 import { useSetRecoilState } from "recoil";
 import { userState } from "src/lib/atom";
 
-const Login = () => {
-  const setUser = useSetRecoilState(userState);
+const Login: NextPage = () => {
   const router = useRouter();
 
+  // ユーザーの情報を取得
+  const setUser = useSetRecoilState(userState);
+
+  /**
+   * GoogleOAuth処理
+   */
   const handleGoogle = (
     res: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => {
@@ -44,6 +50,7 @@ const Login = () => {
       });
     return;
   };
+
   return (
     <div className="bg-blue-100 block relative text-center w-full mx-auto h-full flex-1 ">
       <div className="w-full absolute top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4">
@@ -87,7 +94,6 @@ const Login = () => {
               );
             }}
             theme="dark"
-            style={{}}
             className="rounded-full"
             buttonText="Googleでログイン"
             onSuccess={handleGoogle}

@@ -1,27 +1,32 @@
 import axios from "axios";
-import type { GetStaticProps } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { VFC } from "react";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { Pagination } from "src/components/Sheard/Pagination";
 import { PostCard } from "src/components/Sheard/PostCard";
 import { MainHeading } from "src/components/Sheard/Typography";
 import useSWR from "swr";
 
-type Props = {
+/**
+ * 型定義
+ */
+type HomeProps = {
   posts: PostType[];
   count: number;
 };
 
-const Home: VFC<Props> = (props) => {
+const Home: NextPage<HomeProps> = (props) => {
   const router = useRouter();
 
-  const currentPage = parseInt(`${router.query.page}`) || 1;
+  // ページネーション関連の変数
+  const currentPage: number = parseInt(`${router.query.page}`) || 1;
   const page: number = Number(router.query.page) || 1;
   const limit = 10;
-  const offset = page * limit - limit;
+  const offset: number = page * limit - limit;
 
+  // swrで各種データフェッチ
+  // postsは、isrで取得してあるデータを初期値にする
   const { data: postsInfo } = useSWR(
     `/api/v1/posts?offset=${offset}&limit=${limit}`,
     {
@@ -107,20 +112,5 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 60,
   };
 };
-
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-//   const page: number = Number(ctx.query.page) || 1;
-//   const limit = 10;
-//   const offset = page * limit - limit;
-//   const res = await axios.get(`/api/v1/posts?offset=${offset}&limit=${limit}`);
-//   const { posts, count } = await res.data;
-
-//   return {
-//     props: {
-//       posts: posts,
-//       count: count,
-//     },
-//   };
-// };
 
 export default Home;
