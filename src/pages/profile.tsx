@@ -1,21 +1,33 @@
 import axios from "axios";
 import cc from "classcat";
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { setCookie } from "nookies";
-import type { ChangeEvent } from "react";
+import type { ChangeEventHandler } from "react";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { CommonContainer } from "src/components/Sheard/CommonContainer";
 import { userState } from "src/lib/atom";
 
-const Profile = () => {
-  const user = useRecoilValue(userState);
+const Profile: NextPage = () => {
   const router = useRouter();
+
+  /**
+   * ユーザーの情報を取得
+   */
+  const user = useRecoilValue(userState);
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  /**
+   * loadingの状態
+   */
   const [isLoad, setIsLoad] = useState(false);
 
+  // ===================================
+  // 各stateに初期値を入れる
+  // ===================================
   useEffect(() => {
     if (user) {
       setImage(`${user.image}`);
@@ -35,10 +47,16 @@ const Profile = () => {
     }
   }, []);
 
+  // ===================================
+  // ログインしていなければトップページにリダイレクト
+  // ===================================
   if (!user) {
     router.push("/");
   }
 
+  // ===================================
+  // 変更ボタンをクリック時情報をapiに送信
+  // ===================================
   const handleSend = () => {
     const data = {
       image: image,
@@ -47,6 +65,9 @@ const Profile = () => {
     };
     const oldUser = user;
 
+    // ===================================
+    // データを送信して、情報を更新
+    // ===================================
     axios
       .post("/api/v1/profile", data, {
         headers: {
@@ -72,7 +93,11 @@ const Profile = () => {
         return;
       });
   };
-  const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
+
+  // ===================================
+  // 画像のアップロード処理
+  // ===================================
+  const handleUpload: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (!e.target.files?.[0]) {
       setIsLoad(false);
       return;
@@ -82,6 +107,9 @@ const Profile = () => {
     formData.append("image", files);
     setIsLoad(true);
 
+    // ===================================
+    // 画像をAPIに送信
+    // ===================================
     axios
       .post("/api/v1/upload/profile", formData, {
         headers: {
@@ -96,10 +124,14 @@ const Profile = () => {
         setIsLoad(false);
       });
   };
-  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
+
+  // ===================================
+  // ステートの更新処理
+  // ===================================
+  const handleName: ChangeEventHandler<HTMLInputElement> = (e) => {
     setName(e.target.value);
   };
-  const handleDesc = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleDesc: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setDescription(e.target.value);
   };
 

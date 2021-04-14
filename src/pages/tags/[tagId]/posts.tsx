@@ -1,21 +1,29 @@
 import axios from "axios";
-import type { GetServerSideProps } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import type { VFC } from "react";
 import { Pagination } from "src/components/Sheard/Pagination";
 import { PostCard } from "src/components/Sheard/PostCard";
 import { MainHeading } from "src/components/Sheard/Typography";
 
-type Props = {
+// ===================================
+// propsの型を設定
+// ===================================
+type TagPostsProps = {
   posts: PostType[];
   tags: TagType[];
   tag: TagType;
   count: number;
 };
-const TagPosts: VFC<Props> = ({ posts, tags, tag, count }) => {
+const TagPosts: NextPage<TagPostsProps> = (props) => {
+  const { posts, tags, tag, count } = props;
   const router = useRouter();
+
+  /**
+   * ページネーション用に現在のページを取得
+   */
   const currentPage = parseInt(`${router.query.page}`) || 1;
+
   return (
     <div className="w-full xl:w-11/12 max-w-screen-xl mx-auto mt-4 md:mt-8 px-2 xl:px-0">
       <MainHeading variant="h2" className="mb-4">

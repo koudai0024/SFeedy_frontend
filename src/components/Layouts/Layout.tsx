@@ -1,7 +1,6 @@
 import type { ReactChild, VFC } from "react";
-
-import { Footer } from "./Footer";
-import { Header } from "./Header";
+import { Footer } from "src/components/Layouts/Footer";
+import { Header } from "src/components/Layouts/Header";
 
 type Props = {
   children: ReactChild;

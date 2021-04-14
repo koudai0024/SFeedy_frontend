@@ -1,7 +1,9 @@
 import type { VFC } from "react";
+import { CommonButton } from "src/components/Sheard/Button";
 
-import { CommonButton } from "./Button";
-
+/**
+ * propsの型定義
+ */
 export type PaginationProsp = {
   path: string;
   count: number;
@@ -11,9 +13,17 @@ export type PaginationProsp = {
 export const Pagination: VFC<PaginationProsp> = (props) => {
   const limit = 10;
   const page = Math.ceil(props.count / limit);
+
+  /**
+   * ページ数が1以下の時はページネーションボタンを表示しない
+   */
   if (page <= 1) {
     return null;
   }
+
+  /**
+   * 現在のページが1ページ目の時次へのボタンのみ表示
+   */
   if (props.currentPage === 1) {
     return (
       <div className="flex items-center justify-center mt-4">
@@ -28,6 +38,10 @@ export const Pagination: VFC<PaginationProsp> = (props) => {
       </div>
     );
   }
+
+  /**
+   * 現在のページが最後のページの場合前のページへのボタンのみ表示
+   */
   if (props.currentPage === page) {
     return (
       <div className="flex items-center justify-center mt-4">

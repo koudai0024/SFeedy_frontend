@@ -16,15 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return result;
   });
 
-  const fields = [
-    // {
-    //   loc: "http://localhost:3000", // Absolute url
-    //   lastmod: new Date().toISOString(),
-    //   // changefreq
-    //   // priority
-    // },
-    ...posts,
-  ];
+  const fields = [...posts];
 
   return getServerSideSitemap(ctx, fields);
 };

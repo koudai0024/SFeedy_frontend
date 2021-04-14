@@ -1,16 +1,16 @@
 import axios from "axios";
 import cc from "classcat";
-import type { GetServerSideProps } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
-import type { MouseEvent, VFC } from "react";
+import type { MouseEventHandler } from "react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { PostCard } from "src/components/Sheard/PostCard";
 import { userState } from "src/lib/atom";
 
-type Props = {
+type MyPageProps = {
   user: UserType;
   posts: PostType[];
   count: number;
@@ -18,6 +18,7 @@ type Props = {
   likedPostCount: number;
 };
 
+// タブのアイテム
 const TABS = [
   {
     id: 1,
@@ -29,16 +30,23 @@ const TABS = [
   },
 ];
 
-const MyPage: VFC<Props> = ({ user, posts, likedPosts }) => {
-  const accessUser = useRecoilValue(userState);
+const MyPage: NextPage<MyPageProps> = ({ user, posts, likedPosts }) => {
   const router = useRouter();
+  //ユーザー情報取得
+  const accessUser = useRecoilValue(userState);
+
+  //tabの状態
   const [openTab, setOpenTab] = useState(1);
 
+  //ログインしていなければトップに戻る
   if (!accessUser && typeof window !== "undefined") {
     router.push("/");
   }
 
-  const handleTab = (e: MouseEvent<HTMLButtonElement>) => {
+  /**
+   * タブ切り替え時
+   */
+  const handleTab: MouseEventHandler<HTMLButtonElement> = (e) => {
     setOpenTab(Number(e.currentTarget.dataset?.tab) || 1);
     return;
   };
@@ -70,7 +78,6 @@ const MyPage: VFC<Props> = ({ user, posts, likedPosts }) => {
               return (
                 <button
                   key={tab.id}
-                  // className="bg-blue-500 text-white px-3 py-2 rounded mr-1"
                   className={cc([
                     "px-3 py-2 rounded",
                     {
