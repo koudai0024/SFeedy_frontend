@@ -178,6 +178,7 @@ const MyApp = ({ Component, pageProps }: AppProps, ctx: NextPageContext) => {
               `,
           }}
         />
+        <script data-ad-client="ca-pub-3424893130258299" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       </Head>
 
       <RecoilRoot initializeState={initializeState}>
