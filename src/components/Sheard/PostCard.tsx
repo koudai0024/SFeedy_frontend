@@ -2,7 +2,6 @@ import axios from "axios";
 import cc from "classcat";
 import { format } from "date-fns";
 import marked from "marked";
-import Image from "next/image";
 import Link from "next/link";
 import type { VFC } from "react";
 import { useEffect, useState } from "react";
@@ -81,7 +80,7 @@ export const PostCard: VFC<PostCardProps> = (props) => {
         <Link href="/users/[userId]" as={`/users/${post.userId}`}>
           <a className="flex items-center mb-1 md:mb-2 py-1">
             <div className="flex items-center justify-center overflow-hidden rounded-full w-5 md:w-6 h-5 md:h-6 mr-2 md:mr-3 ">
-              <Image
+              <img
                 src={post.user?.profile.image}
                 alt="ユーザー画像"
                 className="w-5 md:w-6 h-5 md:h-6 object-cover object-center"
