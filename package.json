@@ -51,7 +51,7 @@
     "swr": "0.5.4"
   },
   "devDependencies": {
-    "@babel/core": "7.13.16",
+    "@babel/core": "7.14.0",
     "@tailwindcss/line-clamp": "0.2.0",
     "@tailwindcss/postcss7-compat": "2.1.2",
     "@types/algoliasearch": "3.34.11",
