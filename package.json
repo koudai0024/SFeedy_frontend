@@ -81,7 +81,7 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "heroicons-react": "1.4.0",
     "husky": "6.0.0",
-    "lint-staged": "10.5.4",
+    "lint-staged": "11.0.0",
     "next-pwa": "5.2.21",
     "next-sitemap": "1.6.57",
     "path": "0.12.7",
