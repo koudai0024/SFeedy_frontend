@@ -56,7 +56,7 @@
     "@tailwindcss/postcss7-compat": "2.1.2",
     "@types/algoliasearch": "3.34.11",
     "@types/axios": "0.14.0",
-    "@types/cheerio": "0.22.28",
+    "@types/cheerio": "0.22.29",
     "@types/date-fns": "2.6.0",
     "@types/highlight.js": "10.1.0",
     "@types/marked": "2.0.2",
