@@ -83,7 +83,7 @@
     "husky": "6.0.0",
     "lint-staged": "11.0.0",
     "next-pwa": "5.2.21",
-    "next-sitemap": "1.6.57",
+    "next-sitemap": "1.9.12",
     "path": "0.12.7",
     "postcss": "7.0.35",
     "prettier": "2.3.0",
